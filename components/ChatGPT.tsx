@@ -23,6 +23,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
   const [isUploadingFile, setIsUploadingFile] = useState(false)
   const [interactionIds, setInteractionIds] = useState<{[messageId: string]: string}>({})
   const [uploadedImages, setUploadedImages] = useState<{[messageId: string]: string}>({})
+  const [previewImages, setPreviewImages] = useState<string[]>([])
   const fileInputRef = useRef<HTMLInputElement>(null)
   const imageInputRef = useRef<HTMLInputElement>(null)
   
@@ -187,7 +188,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       return data.message
     } catch (error) {
       console.error('Error calling AI API:', error)
-      return 'Я готов помочь! Попробуйте ещё раз, задав ваш вопрос. Если проблема повторится - задавайте вопросы прямо здесь в чате! 🚀'
+      return 'Я готов помочь! Попробуйте ещё раз, задав ваш вопрос. ��сли проблема повторится - задавайте вопросы прямо здесь в чате! 🚀'
     }
   }
 
