@@ -489,16 +489,28 @@
   border-color: #d1d5db;
 }
 
-.feedback-btn.positive:hover,
-.feedback-btn.positive.selected {
+.feedback-btn.like-btn:hover {
   background: #dcfce7;
   color: #16a34a;
+  border-color: #bbf7d0;
 }
 
-.feedback-btn.negative:hover,
-.feedback-btn.negative.selected {
+.feedback-btn.like-btn.selected {
+  background: #dcfce7;
+  color: #16a34a;
+  border-color: #16a34a;
+}
+
+.feedback-btn.dislike-btn:hover {
   background: #fef2f2;
   color: #dc2626;
+  border-color: #fecaca;
+}
+
+.feedback-btn.dislike-btn.selected {
+  background: #fef2f2;
+  color: #dc2626;
+  border-color: #dc2626;
 }
 
 .feedback-btn:disabled {
