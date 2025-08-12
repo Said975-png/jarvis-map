@@ -12,18 +12,25 @@ export default function TestGroq() {
     setResponse('')
 
     try {
+      setLogs('Отправляем запрос к API...\n')
+
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          messages: [{ role: 'user', content: 'Привет! Проверяем работу GROQ API' }]
+          messages: [{ role: 'user', content: 'Пр��вет! Проверяем работу GROQ API' }]
         }),
       })
 
+      setLogs(prev => prev + `Статус ответа: ${res.status}\n`)
+      setLogs(prev => prev + `Заголовки: ${JSON.stringify(Object.fromEntries(res.headers))}\n`)
+
       const data = await res.json()
-      
+
+      setLogs(prev => prev + `Данные ответа: ${JSON.stringify(data, null, 2)}\n`)
+
       if (data.error) {
         setError(data.error)
       } else {
