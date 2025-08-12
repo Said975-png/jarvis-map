@@ -154,7 +154,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       }
 
       const apiMessages = conversationHistory
-        .filter(msg => msg.text !== 'При��ет! Я ДЖАРВИС, ваш AI-помощник. Чем могу по��очь?')
+        .filter(msg => msg.text !== 'При��ет! Я ДЖАРВИС, ваш AI-помощник. Чем могу п����очь?')
         .map(msg => ({
           role: msg.isUser ? 'user' as const : 'assistant' as const,
           content: msg.text
@@ -362,7 +362,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       timestamp: new Date()
     }
 
-    // Сохраняем изображения для этого сообщения
+    // Сохраняем изображения для этого со��бщения
     if (previewImages.length > 0) {
       setUploadedImages(prev => ({
         ...prev,
@@ -569,7 +569,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
             />
             <button
               onClick={handleSendMessage}
-              disabled={!inputText.trim() || isTyping || isUploadingFile}
+              disabled={(!inputText.trim() && previewImages.length === 0) || isTyping || isUploadingFile}
               className="jarvis-send-btn"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
