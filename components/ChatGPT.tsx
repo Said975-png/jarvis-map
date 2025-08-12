@@ -149,7 +149,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
         if (data.success) {
           return `✨ Виртуальная примерка готова!\n\n![Результат примерки](${data.resultImage})\n\n🎯 Как вам результат? Могу обработать другие варианты о��ежды!`
         } else {
-          return '😔 Извините, произошла ошибка при обработке примерки. Попробуйте:\n• Загрузить изображения заново\n• Использовать более четкие фотографии\n• Убедиться, что одно фото - человек, другое - одежда'
+          return '😔 Извините, произошла ошибка при обработке примерки. Попробуйте:\n• Загрузить изображения заново\n• Использовать более четкие фотографи��\n• Убедиться, что одно фото - человек, другое - одежда'
         }
       }
 
@@ -610,7 +610,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Сообщение ДЖАРВИСУ..."
+              placeholder={previewImages.length > 0 ? "Опишите что хотите сделать с изображениями..." : "Сообщение ДЖАРВИСУ..."}
               className="jarvis-textarea"
               rows={1}
               disabled={isTyping || isUploadingFile}
