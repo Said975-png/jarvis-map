@@ -372,7 +372,7 @@ AI & ML:
 - AWS, Docker
 - CI/CD автоматизация
 
-Хотите узнать больше о конкретной технологии?`
+Хотите узнать больше о конкретной ��ехнологии?`
       }
       // AI questions
       else if (lastMessage.includes('искусственный интеллект') || lastMessage.includes('машинное обучение') || lastMessage.includes('ai') || lastMessage.includes('ии')) {
@@ -398,7 +398,7 @@ AI & ML:
 
 E-commerce платформы:
 - Интернет-магазины с AI рекомендациями
-- Системы управления каталогом
+- Систе��ы управления каталогом
 - Интеграция платежей и доставки
 
 Корпоративные решения:
@@ -414,28 +414,28 @@ EdTech проекты:
 Хотите увидеть демо или обсудить ваш проект?`
       }
       // Creator questions
-      else if (lastMessage.includes('кто тебя создал') || lastMessage.includes('кто твой создатель') || lastMessage.includes('кто разработал тебя') || lastMessage.includes('кто твой разработчи��') || lastMessage.includes('кто твой автор')) {
-        response = `Мой создатель @jarvis_intercoma 👨‍💻`
+      else if (lastMessage.includes('кто тебя создал') || lastMessage.includes('кто твой создатель') || lastMessage.includes('кто разработал тебя') || lastMessage.includes('кто твой разработчик') || lastMessage.includes('кто твой автор')) {
+        response = `Мой создатель @jarvis_intercoma`
       }
       // Technical creation questions
-      else if (lastMessage.includes('как тебя создали') || lastMessage.includes('из чего тебя создали') || lastMessage.includes('как ты устро��н') || lastMessage.includes('какая у тебя архитектура') || lastMessage.includes('как ты работа��шь внутри') || lastMessage.includes('��а чем ты написан')) {
-        response = `Это секретная информация ����`
+      else if (lastMessage.includes('как тебя создали') || lastMessage.includes('из чего тебя создали') || lastMessage.includes('как ты устроен') || lastMessage.includes('какая у тебя архитектура') || lastMessage.includes('как ты работаешь внутри') || lastMessage.includes('на чем ты написан')) {
+        response = `Это секретная информация`
       }
       // Default response for other questions
       else {
-        response = `Интересный вопрос! 🤔
+        response = `Интересный вопрос!
 
 Я ДЖАРВИС, специализируюсь на веб-разработке и AI интеграции.
 
 Могу помочь с:
-• Техническими вопросами по разработке
-• Планированием вашего проекта
-• Выб��ром подходящих технологий
-• Оценкой стоимости и сроков
+- Техническими вопросами по разработке
+- Планированием вашего проекта
+- Выбором подходящих технологий
+- Оценкой стоимости и сроков
 
 Расскажите подробнее о вашей задаче, и я дам конкретные рекомендации!
 
-💬 Задав��йте ��юбые вопросы прямо здесь!`
+Задавайте любые вопросы прямо здесь!`
       }
 
       console.log(`[${timestamp}] Fallback response length:`, response.length)
@@ -561,7 +561,7 @@ EdTech проекты:
       if (response.status === 402) {
         console.log(`[${timestamp}] Insufficient credits - returning fallback`)
         return res.status(200).json({
-          message: 'Привет! Я ДЖАРВИС, ваш AI-помощник по веб-разработке! 🚀\n\nЯ готов помочь вам с:\n• Разработкой современных веб-сайтов\n• Интеграцией AI в ваши проекты\n• Техническими консультациями\n• Планированием ��рое��тов\n\nЗадавайте любые вопросы!'
+          message: 'Привет! Я ДЖАРВИС, ваш AI-помощник по веб-разработке! 🚀\n\nЯ готов помочь вам с:\n• Разработкой современных веб-сайтов\n• Интеграцией AI в ваши проекты\n• Техническими консультациями\n• Планированием ��рое���тов\n\nЗадавайте любые вопросы!'
         })
       } else if (response.status === 401) {
         console.log(`[${timestamp}] Authentication error`)
