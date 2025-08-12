@@ -13,7 +13,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: 'Привет! Я ДЖАРВИС, ваш AI-помощник. Чем могу помочь?',
+      text: 'Привет! Я ДЖАРВИС, ваш AI-помощник. Чем могу помочь?\n\n💡 Новая функция: Загрузите фото человека и одежды, скажите "одень эту вещь на меня" для виртуальной примерки! 👔✨',
       isUser: false,
       timestamp: new Date()
     }
@@ -146,7 +146,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
 
         const data = await response.json()
         if (data.success) {
-          return `✨ Виртуальная примерка готова!\n\n![Результат примерки](${data.resultImage})\n\n🎯 Как вам результат? Могу обработать другие варианты одежды!`
+          return `✨ Виртуальная примерка готова!\n\n![Результат примерки](${data.resultImage})\n\n🎯 Как вам результат? Могу обработать другие варианты о��ежды!`
         } else {
           return '😔 Извините, произошла ошибка при обработке примерки. Попробуйте:\n• Загрузить изображения заново\n• Использовать более четкие фотографии\n• Убедиться, что одно фото - человек, другое - одежда'
         }
@@ -224,7 +224,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
 
       const uploadResults = await Promise.all(uploadPromises)
 
-      // Добавляем сообщение с загруженными изображениями
+      // До��авляем сообщение с загруженными изображениями
       const imageMessage: Message = {
         id: Date.now().toString(),
         text: `🖼️ Загружено изображений: ${uploadResults.length}\n${uploadResults.map(r => r.file).join('\n')}`,
