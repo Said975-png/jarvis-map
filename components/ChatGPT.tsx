@@ -154,7 +154,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       }
 
       const apiMessages = conversationHistory
-        .filter(msg => msg.text !== 'При��ет! Я ДЖАРВИС, ваш AI-помощник. Чем могу помочь?')
+        .filter(msg => msg.text !== 'При��ет! Я ДЖАРВИС, ваш AI-помощник. Чем могу по��очь?')
         .map(msg => ({
           role: msg.isUser ? 'user' as const : 'assistant' as const,
           content: msg.text
@@ -225,32 +225,8 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
 
       const uploadResults = await Promise.all(uploadPromises)
 
-      // До��авляем сообщение с загруженными изображениями
-      const imageMessage: Message = {
-        id: Date.now().toString(),
-        text: `🖼️ Загружено изображений: ${uploadResults.length}\n${uploadResults.map(r => r.file).join('\n')}`,
-        isUser: true,
-        timestamp: new Date()
-      }
-
-      // Сохраняем URLs изображений
-      setUploadedImages(prev => ({
-        ...prev,
-        [imageMessage.id]: uploadResults.map(r => r.url).join(',')
-      }))
-
-      setMessages(prev => [...prev, imageMessage])
-
-      // ��сли загружено 2 изображения, предлагаем примерку
-      if (uploadResults.length === 2) {
-        const suggestionMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          text: 'Отлично! Вы загрузили 2 изображени��. Напишите "одень эту вещь на меня" для виртуальной примерки одежды! 👔✨',
-          isUser: false,
-          timestamp: new Date()
-        }
-        setMessages(prev => [...prev, suggestionMessage])
-      }
+      // Добавляем изображения в превью (не отправляем сразу в чат)
+      setPreviewImages(uploadResults.map(r => r.url))
 
     } catch (error) {
       console.error('Image upload error:', error)
