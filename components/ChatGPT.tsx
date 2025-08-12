@@ -13,7 +13,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: 'Привет! Я ДЖАРВИС, ваш AI-помощник. Чем могу помочь?\n\n💡 Нова�� функция: Загрузите фото человека и одежды, скажите "одень эту вещь на меня" для виртуальной примерки! 👔✨',
+      text: 'Привет! Я ДЖАРВИС, ваш AI-помощник. Чем могу помочь?\n\nНовая функция: Загрузите фото человека и одежды, скажите "одень эту вещь на меня" для виртуальной примерки!',
       isUser: false,
       timestamp: new Date()
     }
@@ -188,7 +188,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       return data.message
     } catch (error) {
       console.error('Error calling AI API:', error)
-      return 'Я готов помочь! Попробуйте ещё раз, задав ваш вопрос. ��сли проблема повторится - задавайте вопросы прямо зд��сь в чате! 🚀'
+      return 'Я готов помочь! Попробуйте ещё раз, задав ваш во��рос. ��сли проблема повторится - задавайте вопросы прямо зд��сь в чате! 🚀'
     }
   }
 
@@ -398,7 +398,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       const finalMessages = [...updatedMessages, aiResponse]
       setMessages(finalMessages)
 
-      // Сохраняем взаимодействие для обучения
+      // Сохраняем взаимодействие дл�� обучения
       await saveInteractionToLearning(currentInput, aiText, aiResponse.id)
     } catch (error) {
       console.error('Error generating AI response:', error)
@@ -526,7 +526,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
           <div className="image-preview-container">
             <div className="preview-header">
               <span className="preview-title">
-                📸 Загружено изображений: {previewImages.length}
+                📸 Загр��жено изображений: {previewImages.length}
               </span>
               <button
                 className="clear-previews-btn"
