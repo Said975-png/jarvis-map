@@ -62,7 +62,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
     }
   }
 
-  // Извлечение тегов из текста
+  // Извл��чение тегов из текста
   const extractTags = (text: string): string[] => {
     const commonTags = [
       'веб-разработка', 'дизайн', 'программирование', 'ai', 'технологии',
@@ -240,7 +240,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
 
       setMessages(prev => [...prev, imageMessage])
 
-      // Если загружено 2 изображения, предлагаем примерку
+      // ��сли загружено 2 изображения, предлагаем примерку
       if (uploadResults.length === 2) {
         const suggestionMessage: Message = {
           id: (Date.now() + 1).toString(),
@@ -322,7 +322,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       console.error('File upload error:', error)
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: `Ошибка при загрузке файла: ${error instanceof Error ? error.message : 'Неизвестная ошибка'}`,
+        text: `Ошибка при загрузке ��айла: ${error instanceof Error ? error.message : 'Неизвестная ошибка'}`,
         isUser: false,
         timestamp: new Date()
       }
@@ -527,10 +527,10 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
           />
           <div className="jarvis-input-container">
             <button
-              onClick={openFileDialog}
+              onClick={openImageDialog}
               disabled={isTyping || isUploadingFile}
-              className="jarvis-attachment-btn"
-              title="Прикрепить PDF файл"
+              className="jarvis-image-btn"
+              title="Загрузить изображения для примерки"
             >
               {isUploadingFile ? (
                 <div className="attachment-loading">
@@ -538,9 +538,19 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
                 </div>
               ) : (
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M21.44 11.05L12.25 20.24C11.1137 21.3568 9.59034 21.9749 8.005 21.9749C6.41966 21.9749 4.8963 21.3568 3.76 20.24C2.64317 19.1037 2.02508 17.5803 2.02508 15.995C2.02508 14.4097 2.64317 12.8863 3.76 11.75L12.95 2.56C13.7006 1.80944 14.7186 1.38755 15.78 1.38755C16.8414 1.38755 17.8594 1.80944 18.61 2.56C19.3606 3.31056 19.7825 4.32859 19.7825 5.39C19.7825 6.45141 19.3606 7.46944 18.61 8.22L9.41 17.41C9.03494 17.7851 8.52656 17.9972 8 17.9972C7.47344 17.9972 6.96506 17.7851 6.59 17.41C6.21494 17.0349 6.00281 16.5266 6.00281 16C6.00281 15.4734 6.21494 14.9651 6.59 14.59L15.07 6.1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               )}
+            </button>
+            <button
+              onClick={openFileDialog}
+              disabled={isTyping || isUploadingFile}
+              className="jarvis-attachment-btn"
+              title="Прикрепить PDF файл"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M21.44 11.05L12.25 20.24C11.1137 21.3568 9.59034 21.9749 8.005 21.9749C6.41966 21.9749 4.8963 21.3568 3.76 20.24C2.64317 19.1037 2.02508 17.5803 2.02508 15.995C2.02508 14.4097 2.64317 12.8863 3.76 11.75L12.95 2.56C13.7006 1.80944 14.7186 1.38755 15.78 1.38755C16.8414 1.38755 17.8594 1.80944 18.61 2.56C19.3606 3.31056 19.7825 4.32859 19.7825 5.39C19.7825 6.45141 19.3606 7.46944 18.61 8.22L9.41 17.41C9.03494 17.7851 8.52656 17.9972 8 17.9972C7.47344 17.9972 6.96506 17.7851 6.59 17.41C6.21494 17.0349 6.00281 16.5266 6.00281 16C6.00281 15.4734 6.21494 14.9651 6.59 14.59L15.07 6.1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </button>
             <textarea
               ref={textareaRef}
