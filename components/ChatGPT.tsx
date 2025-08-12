@@ -317,6 +317,17 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
     }
   }
 
+  const handleImageInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+    if (files && files.length > 0) {
+      handleImageUpload(files)
+    }
+    // Очищаем input для возможности повторной загрузки
+    if (imageInputRef.current) {
+      imageInputRef.current.value = ''
+    }
+  }
+
   const openFileDialog = () => {
     if (!isTyping && !isUploadingFile && fileInputRef.current) {
       fileInputRef.current.click()
