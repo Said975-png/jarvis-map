@@ -50,7 +50,7 @@ function replaceEnglishTerms(text: string): string {
     'React': 'Реакт',
     'Vue': 'Вью',
     'Angular': 'Ангуляр',
-    'Next.js': 'Некст.джс',
+    'Next.js': '��екст.джс',
     'Nuxt': 'Накст',
 
     // Базы данных
@@ -201,6 +201,27 @@ function checkAndUpdateLimit(ip: string): { allowed: boolean; remaining: number 
   return { allowed: true, remaining: REQUESTS_LIMIT - userLimit.count }
 }
 
+// Функция для удаления эмодзи и символов
+function removeEmojisAndSymbols(text: string): string {
+  return text
+    // Убираем эмодзи (различные диапазоны)
+    .replace(/[\u{1F600}-\u{1F64F}]/gu, '') // Emoticons
+    .replace(/[\u{1F300}-\u{1F5FF}]/gu, '') // Miscellaneous Symbols and Pictographs
+    .replace(/[\u{1F680}-\u{1F6FF}]/gu, '') // Transport and Map Symbols
+    .replace(/[\u{1F1E0}-\u{1F1FF}]/gu, '') // Regional indicator symbols (flags)
+    .replace(/[\u{2600}-\u{26FF}]/gu, '')   // Miscellaneous Symbols
+    .replace(/[\u{2700}-\u{27BF}]/gu, '')   // Dingbats
+    .replace(/[\u{1F900}-\u{1F9FF}]/gu, '') // Supplemental Symbols and Pictographs
+    .replace(/[\u{1F780}-\u{1F7FF}]/gu, '') // Geometric Shapes Extended
+    // Убираем специальные символы
+    .replace(/[🎯🚀💰📦💎📞🛠️🌐🤖🎨⚡💼🏪🏢🎓👨‍💻🔒😅📱💬]/g, '')
+    // Убираем символы списков
+    .replace(/•\s*/g, '- ')
+    // Убираем множественные пробелы и переносы
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
 // Функция для удаления Markdown форматирования
 function cleanMarkdown(text: string): string {
   return text
@@ -208,15 +229,15 @@ function cleanMarkdown(text: string): string {
     .replace(/\*\*([^*]+)\*\*/g, '$1')
     // Убираем курсив *текст*
     .replace(/\*([^*]+)\*/g, '$1')
-    // Убираем заголо��ки ### текст
+    // Убираем заголовки ### текст
     .replace(/^#{1,6}\s+/gm, '')
     // Убираем инлайн код `код`
     .replace(/`([^`]+)`/g, '$1')
     // Убираем блоки кода ```код```
     .replace(/```[\s\S]*?```/g, '')
-    // Заменяем списки на пули
-    .replace(/^\*\s+/gm, '• ')
-    // Убираем лишние звездочки (но сохраняем эмодзи)
+    // Заменяем списки на дефисы
+    .replace(/^\*\s+/gm, '- ')
+    // Убираем лишние звездочки
     .replace(/\*(?![^\s])/g, '')
     // Убираем лишние решетки
     .replace(/#(?![0-9])/g, '')
@@ -339,7 +360,7 @@ Max - 5,000,000 сум
 AI интеграция:
 - Чат-боты и виртуальные ассистенты
 - Анализ данных и автоматизация
-- Персонал��зация пользовательского опыта
+- Персонал���зация пользовательского опыта
 
 Дизайн и UX:
 - Современный UI/UX дизайн
@@ -408,7 +429,7 @@ E-commerce платформы:
 
 EdTech проекты:
 - Образовательные платформы
-- LMS системы с AI
+- LMS сис��емы с AI
 - Интерактивные курсы
 
 Хотите увидеть демо или обсудить ваш проект?`
@@ -453,7 +474,7 @@ EdTech проекты:
 - UI/UX дизайн и архитектура
 - DevOps и облачные технологии
 - Базы данных и оптимизация
-- Бизнес-анализ и консультиро��ание
+- ��изнес-анализ и консультиро��ание
 - Современные фреймворки и инструменты
 
 СТИЛЬ ОБЩЕНИЯ:
@@ -483,7 +504,7 @@ EdTech проекты:
 УСЛУГИ И ТАРИФЫ (упоминай при запросах о работе):
 - Basic (2,500,000 сум) - простые сайты и лендинги
 - Pro (4,000,000 сум) - веб-приложения с AI интеграцией
-- Max (5,000,000 сум) - корпоративные и enterprise решения
+- Max (5,000,000 сум) - корпоративные и enterprise р��шения
 
 КОНТАКТЫ: Онлайн-чат на са��те
 
