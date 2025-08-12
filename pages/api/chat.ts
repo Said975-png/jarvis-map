@@ -86,7 +86,7 @@ function replaceEnglishTerms(text: string): string {
     'Mobile': 'Мобильный',
     'desktop': 'десктоп',
     'Desktop': 'Десктоп',
-    'user': 'пользов���тель',
+    'user': 'пользов��тель',
     'User': 'Пользователь',
     'interface': 'интерфейс',
     'Interface': 'Инт��рфейс',
@@ -169,7 +169,7 @@ function getClientIP(req: NextApiRequest): string {
   return remoteAddress || 'unknown'
 }
 
-// Функция для проверки и обновления лимита
+// Функция для проверки и обновления ли��ита
 function checkAndUpdateLimit(ip: string): { allowed: boolean; remaining: number } {
   const now = Date.now()
 
@@ -208,7 +208,7 @@ function cleanMarkdown(text: string): string {
     .replace(/\*\*([^*]+)\*\*/g, '$1')
     // Убираем курсив *текст*
     .replace(/\*([^*]+)\*/g, '$1')
-    // Убираем заголовки ### текст
+    // Убираем заголо��ки ### текст
     .replace(/^#{1,6}\s+/gm, '')
     // Убираем инлайн код `код`
     .replace(/`([^`]+)`/g, '$1')
@@ -372,10 +372,10 @@ AI & ML:
 - AWS, Docker
 - CI/CD автоматизация
 
-Хотите узнать бо��ьше о конкретной технологии?`
+Хотите узнать больше о конкретной технологии?`
       }
       // AI questions
-      else if (lastMessage.includes('искусственный интеллект') || lastMessage.includes('машин��ое обучение') || lastMessage.includes('ai') || lastMessage.includes('ии')) {
+      else if (lastMessage.includes('искусственный интеллект') || lastMessage.includes('машинное обучение') || lastMessage.includes('ai') || lastMessage.includes('ии')) {
         response = `AI интеграция - моя специализация!
 
 Что я могу интегрировать:
@@ -394,22 +394,22 @@ AI & ML:
       }
       // Portfolio/examples
       else if (lastMessage.includes('портфолио') || lastMessage.includes('примеры') || lastMessage.includes('работы') || lastMessage.includes('проекты')) {
-        response = `💼 Примеры моих работ:
+        response = `Примеры моих работ:
 
-🏪 E-commerce платформы:
-• Интернет-магазины с AI рек��мендациями
-• Системы управлен��я каталогом
-• Инте����ац��я платежей и доставки
+E-commerce платформы:
+- Интернет-магазины с AI рекомендациями
+- Системы управления каталогом
+- Интеграция платежей и доставки
 
-🏢 Корпоратив��ые решения:
-• CRM системы с аналитикой
-• Порталы ����отрудников
-• Системы документооборота
+Корпоративные решения:
+- CRM системы с аналитикой
+- Порталы сотрудников
+- Системы документооборота
 
-🎓 EdTech проекты:
-• Образовательные платформы
-• LMS системы с AI
-• Интерактивные курсы
+EdTech проекты:
+- Образовательные платформы
+- LMS системы с AI
+- Интерактивные курсы
 
 Хотите увидеть демо или обсудить ваш проект?`
       }
@@ -419,7 +419,7 @@ AI & ML:
       }
       // Technical creation questions
       else if (lastMessage.includes('как тебя создали') || lastMessage.includes('из чего тебя создали') || lastMessage.includes('как ты устро��н') || lastMessage.includes('какая у тебя архитектура') || lastMessage.includes('как ты работа��шь внутри') || lastMessage.includes('��а чем ты написан')) {
-        response = `Это секретная информация 🔒`
+        response = `Это секретная информация ����`
       }
       // Default response for other questions
       else {
@@ -445,7 +445,7 @@ AI & ML:
     // Добавляем системное сообщение для ДЖАРВИС
     const systemMessage: ChatMessage = {
       role: 'system',
-      content: `Ты ДЖАРВИС - продвинутый AI-помощник и эксперт по веб-разраб��тке. Ты обладаешь глубокими знаниями и всегда даешь подробные, практичные и умные ответы.
+      content: `Ты ДЖАРВИС - продвинутый AI-помощник и эксперт по веб-разраб��тке. Ты обладаешь глубокими знаниями и всегда даешь подробные, практичные и умные ��тветы.
 
 ТВОЯ ЭКСПЕРТИЗА:
 - Веб-разработка (Frontend/Backend)
