@@ -22,7 +22,9 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
   const [isTyping, setIsTyping] = useState(false)
   const [isUploadingFile, setIsUploadingFile] = useState(false)
   const [interactionIds, setInteractionIds] = useState<{[messageId: string]: string}>({})
+  const [uploadedImages, setUploadedImages] = useState<{[messageId: string]: string}>({})
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const imageInputRef = useRef<HTMLInputElement>(null)
   
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
