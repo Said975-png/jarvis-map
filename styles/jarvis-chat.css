@@ -538,6 +538,33 @@
   font-weight: 500;
 }
 
+/* Chat Images */
+.message-image {
+  margin: 8px 0;
+}
+
+.chat-result-image {
+  max-width: 280px;
+  max-height: 280px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 2px solid #e5e7eb;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.chat-result-image:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+  .chat-result-image {
+    max-width: 240px;
+    max-height: 240px;
+  }
+}
+
 /* Feedback Comment */
 .feedback-comment {
   margin-top: 8px;
