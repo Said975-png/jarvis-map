@@ -401,8 +401,9 @@
   box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
 }
 
-/* Attachment Button */
-.jarvis-attachment-btn {
+/* Attachment Buttons */
+.jarvis-attachment-btn,
+.jarvis-image-btn {
   width: 32px;
   height: 32px;
   border-radius: 8px;
@@ -417,12 +418,24 @@
   flex-shrink: 0;
 }
 
+.jarvis-image-btn {
+  background: #e3f2fd;
+  color: #1976d2;
+  margin-right: 4px;
+}
+
 .jarvis-attachment-btn:hover:not(:disabled) {
   background: #f3f4f6;
   color: #374151;
 }
 
-.jarvis-attachment-btn:disabled {
+.jarvis-image-btn:hover:not(:disabled) {
+  background: #bbdefb;
+  color: #0d47a1;
+}
+
+.jarvis-attachment-btn:disabled,
+.jarvis-image-btn:disabled {
   color: #d1d5db;
   cursor: not-allowed;
 }
