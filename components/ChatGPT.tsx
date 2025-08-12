@@ -30,7 +30,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const sessionId = useRef(`session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`)
 
-  // Функция для сохранения взаимодействия в базе знаний
+  // Функция ��ля сохранения взаимодействия в базе знаний
   const saveInteractionToLearning = async (userMessage: string, botResponse: string, userMessageId: string) => {
     try {
       const response = await fetch('/api/learning', {
@@ -515,6 +515,14 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
             type="file"
             accept=".pdf"
             onChange={handleFileInputChange}
+            style={{ display: 'none' }}
+          />
+          <input
+            ref={imageInputRef}
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handleImageInputChange}
             style={{ display: 'none' }}
           />
           <div className="jarvis-input-container">
