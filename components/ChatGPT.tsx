@@ -13,7 +13,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: 'Привет! Я ДЖАРВИС, ваш AI-помощник. Чем могу помочь?\n\n💡 Новая функция: Загрузите фото человека и одежды, скажите "одень эту вещь на меня" для виртуальной примерки! 👔✨',
+      text: 'Привет! Я ДЖАРВИС, ваш AI-помощник. Чем могу помочь?\n\n💡 Нова�� функция: Загрузите фото человека и одежды, скажите "одень эту вещь на меня" для виртуальной примерки! 👔✨',
       isUser: false,
       timestamp: new Date()
     }
@@ -149,7 +149,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
         if (data.success) {
           return `✨ Виртуальная примерка готова!\n\n![Результат примерки](${data.resultImage})\n\n🎯 Как вам результат? Могу обработать другие варианты о��ежды!`
         } else {
-          return '😔 Извините, произошла ошибка при о��работке примерки. Попробуйте:\n• Загрузить изображения заново\n• Использовать более четкие фотографии\n• Убедиться, что одно фото - человек, другое - одежда'
+          return '😔 Извините, произошла ошибка при обработке примерки. Попробуйте:\n• Загрузить изображения заново\n• Использовать более четкие фотографии\n• Убедиться, что одно фото - человек, другое - одежда'
         }
       }
 
@@ -188,7 +188,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       return data.message
     } catch (error) {
       console.error('Error calling AI API:', error)
-      return 'Я готов помо��ь! Попробуйте ещё раз, задав ваш вопрос. ��сли проблема повторится - задавайте вопросы прямо зд��сь в чате! 🚀'
+      return 'Я готов помочь! Попробуйте ещё раз, задав ваш вопрос. ��сли проблема повторится - задавайте вопросы прямо зд��сь в чате! 🚀'
     }
   }
 
@@ -267,7 +267,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
 
     setIsUploadingFile(true)
 
-    // Добавляе�� сообщение о загрузке файла
+    // Добавляем сообщение о загрузке файла
     const uploadMessage: Message = {
       id: Date.now().toString(),
       text: `📎 Загружаю файл: ${file.name}`,
@@ -289,7 +289,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
 
       const analysisMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: data.message || 'Файл проанализирован',
+        text: data.message || 'Файл проан��лизирован',
         isUser: false,
         timestamp: new Date()
       }
@@ -530,7 +530,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
               </span>
               <button
                 className="clear-previews-btn"
-                onClick={() => setPreviewImages([])}
+                onClick={clearAllPreviews}
                 title="Удалить все изображения"
               >
                 ✕
@@ -542,7 +542,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
                   <img src={url} alt={`Preview ${index + 1}`} className="preview-image" />
                   <button
                     className="remove-image-btn"
-                    onClick={() => setPreviewImages(prev => prev.filter((_, i) => i !== index))}
+                    onClick={() => removePreviewImage(index)}
                     title="Удалить изображение"
                   >
                     ✕
