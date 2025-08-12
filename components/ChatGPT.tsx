@@ -146,7 +146,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
 
         const data = await response.json()
         if (data.success) {
-          return `Готово! Вот как будет выглядеть примерка:\n\n![Результат примерки](${data.resultImage})\n\nКак вам результат? 😊`
+          return `Готово! Вот как будет выг��ядеть примерка:\n\n![Результат примерки](${data.resultImage})\n\nКак вам результат? 😊`
         } else {
           return 'Извините, произошла ошибка при обработке примерки. Попробуйте загрузить изображения заново.'
         }
@@ -255,7 +255,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       console.error('Image upload error:', error)
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: `Ошибка при загрузке изображений: ${error instanceof Error ? error.message : 'Неизвестная ошибка'}`,
+        text: `Ошибка пр�� загрузке изображений: ${error instanceof Error ? error.message : 'Неизвестная ошибка'}`,
         isUser: false,
         timestamp: new Date()
       }
@@ -337,7 +337,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
     if (files && files.length > 0) {
       handleFileUpload(files[0])
     }
-    // Очищаем input для возможности повторной загруз��и того же файла
+    // Очищаем input для возможности повторной загруз���и того же файла
     if (fileInputRef.current) {
       fileInputRef.current.value = ''
     }
@@ -467,12 +467,23 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
               )}
               <div className="message-content">
                 <div className="message-bubble">
-                  {message.text.split('\n').map((line, index) => (
-                    <div key={index}>
-                      {line}
-                      {index < message.text.split('\n').length - 1 && <br />}
-                    </div>
-                  ))}
+                  {message.text.split('\n').map((line, index) => {
+                    // Проверяем, если строка содержит markdown изображение
+                    const imageMatch = line.match(/!\[([^\]]*)\]\(([^)]+)\)/)
+                    if (imageMatch) {
+                      return (
+                        <div key={index} className="message-image">
+                          <img src={imageMatch[2]} alt={imageMatch[1]} className="chat-result-image" />
+                        </div>
+                      )
+                    }
+                    return (
+                      <div key={index}>
+                        {line}
+                        {index < message.text.split('\n').length - 1 && <br />}
+                      </div>
+                    )
+                  })}
                 </div>
                 {!message.isUser && interactionIds[message.id] && (
                   <MessageFeedback
