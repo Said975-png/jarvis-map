@@ -146,9 +146,9 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
 
         const data = await response.json()
         if (data.success) {
-          return `Готово! Вот как будет выг��ядеть примерка:\n\n![Результат примерки](${data.resultImage})\n\nКак вам результат? 😊`
+          return `✨ Виртуальная примерка готова!\n\n![Результат примерки](${data.resultImage})\n\n🎯 Как вам результат? Могу обработать другие варианты одежды!`
         } else {
-          return 'Извините, произошла ошибка при обработке примерки. Попробуйте загрузить изображения заново.'
+          return '😔 Извините, произошла ошибка при обработке примерки. Попробуйте:\n• Загрузить изображения заново\n• Использовать более четкие фотографии\n• Убедиться, что одно фото - человек, другое - одежда'
         }
       }
 
@@ -255,7 +255,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       console.error('Image upload error:', error)
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: `Ошибка пр�� загрузке изображений: ${error instanceof Error ? error.message : 'Неизвестная ошибка'}`,
+        text: `Ошибка при загрузке изображений: ${error instanceof Error ? error.message : 'Неизвестная ошибка'}`,
         isUser: false,
         timestamp: new Date()
       }
@@ -337,7 +337,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
     if (files && files.length > 0) {
       handleFileUpload(files[0])
     }
-    // Очищаем input для возможности повторной загруз���и того же файла
+    // Очищаем input для возможности повторной загруз��и того же файла
     if (fileInputRef.current) {
       fileInputRef.current.value = ''
     }
