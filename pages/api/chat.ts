@@ -115,7 +115,7 @@ function replaceEnglishTerms(text: string): string {
     'variable': 'переменная',
     'Variable': 'Переменная',
     'property': 'свойство',
-    'Property': 'Свойство',
+    'Property': 'Свойст��о',
     'value': 'значение',
     'Value': 'Значение',
     'error': 'ошибка',
@@ -269,6 +269,8 @@ export default async function handler(
     const groqApiKey = process.env.GROQ_API_KEY
     console.log(`[${timestamp}] GROQ API Key available:`, !!groqApiKey)
     console.log(`[${timestamp}] API Key prefix:`, groqApiKey ? groqApiKey.substring(0, 15) + '...' : 'N/A')
+    console.log(`[${timestamp}] API Key length:`, groqApiKey ? groqApiKey.length : 0)
+    console.log(`[${timestamp}] All env vars keys:`, Object.keys(process.env).filter(key => key.includes('GROQ')).join(', '))
 
     if (!groqApiKey) {
       console.log(`[${timestamp}] Fallback: Using local JARVIS responses`)
@@ -384,7 +386,7 @@ AI & ML:
 • Персонализация контента
 
 Примеры проектов:
-• E-commerce с AI рекомендациями
+• E-commerce с AI рекоменд��циями
 • Образовательные платформы с ИИ
 • CRM системы с ��мной а��алитикой
 
@@ -433,7 +435,7 @@ AI & ML:
 
 Расскажите подробнее о вашей задаче, и я дам конкретные рекомендации!
 
-💬 Задав��йте ��юбые вопросы прямо здесь!`
+💬 Задав��йте ��юбые вопросы прямо здес��!`
       }
 
       console.log(`[${timestamp}] Fallback response length:`, response.length)
@@ -558,7 +560,7 @@ AI & ML:
       } else if (response.status === 429) {
         console.log(`[${timestamp}] Rate limit exceeded`)
         return res.status(200).json({
-          message: 'Я получаю слишком много запросов одновременно! 😅\n\nДайте мне секундочку отдохнуть и попробуйте еще раз. Или напишите напрямую - там я всегда доступен!'
+          message: 'Я получаю слишком много запросов одновременно! 😅\n\nДайте мне секундочку отдохнуть и попробуйте еще раз. Или напишите напрям��ю - там я всегда доступен!'
         })
       }
 
