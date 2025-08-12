@@ -384,7 +384,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
     setIsTyping(true)
 
     try {
-      const aiText = await generateJarvisResponse(currentInput, updatedMessages)
+      const aiText = await generateJarvisResponse(currentInput, updatedMessages, userMessage.id)
 
       const aiResponse: Message = {
         id: (Date.now() + 1).toString(),
