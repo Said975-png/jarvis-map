@@ -63,7 +63,7 @@ function replaceEnglishTerms(text: string): string {
 
     // Общие термины
     'code': 'код',
-    'Code': 'Код',
+    'Code': '��од',
     'coding': 'кодирование',
     'Coding': 'Кодирование',
     'programming': 'программирование',
@@ -143,7 +143,7 @@ function replaceEnglishTerms(text: string): string {
   return result
 }
 
-// Система лимитов запросов
+// Система ли��итов запросов
 interface UserLimit {
   count: number
   resetTime: number
@@ -339,7 +339,7 @@ Max - 5,000,000 сум
 AI интеграция:
 - Чат-боты и виртуальные ассистенты
 - Анализ данных и автоматизация
-- Персонализация пользовательского опыта
+- Персонал��зация пользовательского опыта
 
 Дизайн и UX:
 - Современный UI/UX дизайн
@@ -350,39 +350,39 @@ AI интеграция:
       }
       // Technology questions
       else if (lastMessage.includes('технолог') || lastMessage.includes('стек') || lastMessage.includes('как работаешь')) {
-        response = `⚡ Технологии, ко��орые я использую:
+        response = `Технологии, которые я использую:
 
 Frontend:
-• React, Next.js, Vue.js
-• TypeScript, JavaScript
-• CSS3, Tailwind, SCSS
+- React, Next.js, Vue.js
+- TypeScript, JavaScript
+- CSS3, Tailwind, SCSS
 
 Backend:
-• Node.js, Python
-• PostgreSQL, MongoDB
-• REST API, GraphQL
+- Node.js, Python
+- PostgreSQL, MongoDB
+- REST API, GraphQL
 
 AI & ML:
-• OpenAI GPT, Claude
-• TensorFlow, PyTorch
-• Natural Language Processing
+- OpenAI GPT, Claude
+- TensorFlow, PyTorch
+- Natural Language Processing
 
 Инфраструктура:
-• Vercel, Netlify
-• AWS, Docker
-• CI/CD автоматиза��ия
+- Vercel, Netlify
+- AWS, Docker
+- CI/CD автоматизация
 
-Хотите узнать больше о конкретной техноло��ии?`
+Хотите узнать больше о конкретной технологии?`
       }
       // AI questions
       else if (lastMessage.includes('искусст��ен��ый интеллект') || lastMessage.includes('машинное обучение') || lastMessage.includes('ai') || lastMessage.includes('ии')) {
         response = `🤖 AI интеграция - моя специализация!
 
-Что я могу интегрировать:
+Что я могу интег��ировать:
 • Умные чат-боты для сайтов
 • Системы рекомендаций
 • Автоматическая обработка данных
-• Анализ пользовательского повед��ния
+• Анализ польз��вательского повед��ния
 • Персонализация контента
 
 Примеры проектов:
@@ -453,7 +453,7 @@ AI & ML:
 - UI/UX дизайн и архитектура
 - DevOps и облачные технологии
 - Базы данных и оптимизация
-- Бизнес-анализ и консультирование
+- Бизнес-анализ и консультиро��ание
 - Современные фреймворки и инструменты
 
 СТИЛЬ ОБЩЕНИЯ:
@@ -485,7 +485,7 @@ AI & ML:
 - Pro (4,000,000 сум) - веб-приложения с AI интеграцией
 - Max (5,000,000 сум) - корпоративные и enterprise решения
 
-КОНТАКТЫ: Онлайн-чат на сайте
+КОНТАКТЫ: Онлайн-чат на са��те
 
 КРИТИЧЕСКИ ВАЖНО:
 - Отвечай ТОЛЬКО на русском языке
@@ -566,7 +566,7 @@ AI & ML:
       } else if (response.status === 401) {
         console.log(`[${timestamp}] Authentication error`)
         return res.status(200).json({
-          message: 'Привет! Я ДЖАРВИС, ваш AI-помощник п�� веб-разра��отке! 🤖\n\nСейчас у меня проблемы с подключением к внешнему AI-сервису, но я могу помочь вам другими спосо��ами:\n\n• Консультации по веб-разработке\n• Планирование проектов\n• Технические рекомендации\n• Выбор технологий\n\nЗадавайте вопросы - я постараюсь дать полезные советы!'
+          message: 'Привет! Я ДЖАРВИС, ваш AI-помощник п�� веб-разра��отке! 🤖\n\nСейчас у меня проблемы с подключением к внешн��му AI-сервису, но я могу помочь вам другими спосо��ами:\n\n• Консультации по веб-разработке\n• Планирование проектов\n• Технические рекомендации\n• Выбор технологий\n\nЗадавайте вопросы - я постараюсь дать полезные советы!'
         })
       } else if (response.status === 429) {
         console.log(`[${timestamp}] Rate limit exceeded`)
