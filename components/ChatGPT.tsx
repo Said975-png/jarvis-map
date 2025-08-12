@@ -513,6 +513,46 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
           <div ref={messagesEndRef} />
         </div>
 
+        {/* Image Previews */}
+        {previewImages.length > 0 && (
+          <div className="image-preview-container">
+            <div className="preview-header">
+              <span className="preview-title">
+                📸 Загружено изображений: {previewImages.length}
+              </span>
+              <button
+                className="clear-previews-btn"
+                onClick={() => setPreviewImages([])}
+                title="Удалить все изображения"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="preview-images">
+              {previewImages.map((url, index) => (
+                <div key={index} className="preview-image-item">
+                  <img src={url} alt={`Preview ${index + 1}`} className="preview-image" />
+                  <button
+                    className="remove-image-btn"
+                    onClick={() => setPreviewImages(prev => prev.filter((_, i) => i !== index))}
+                    title="Удалить изображение"
+                  >
+                    ✕
+                  </button>
+                  <span className="image-label">
+                    {index === 0 ? 'Человек' : index === 1 ? 'Одежда' : `Фото ${index + 1}`}
+                  </span>
+                </div>
+              ))}
+            </div>
+            {previewImages.length === 2 && (
+              <div className="tryon-hint">
+                💡 Напишите "одень эту вещь на меня" для виртуальной примерки!
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Input */}
         <div className="jarvis-input-area">
           <input
