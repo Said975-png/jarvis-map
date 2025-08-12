@@ -31,7 +31,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const sessionId = useRef(`session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`)
 
-  // Функция ��ля сохранения взаимодействия в базе знаний
+  // Функция ��ля сохра��ения взаимодействия в базе знаний
   const saveInteractionToLearning = async (userMessage: string, botResponse: string, userMessageId: string) => {
     try {
       const response = await fetch('/api/learning', {
@@ -154,7 +154,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       }
 
       const apiMessages = conversationHistory
-        .filter(msg => msg.text !== 'При��ет! Я ДЖАРВИС, ваш AI-помощник. Чем могу п����очь?')
+        .filter(msg => msg.text !== 'При���ет! Я ДЖАРВИС, ваш AI-помощник. Чем могу п����очь?')
         .map(msg => ({
           role: msg.isUser ? 'user' as const : 'assistant' as const,
           content: msg.text
@@ -360,7 +360,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
     // Если есть превью изображения, добавляем их в сообщение
     if (previewImages.length > 0) {
       const imageInfo = `🖼️ Изображения (${previewImages.length}): ${previewImages.map((_, i) => `Фото ${i + 1}`).join(', ')}\n\n`
-      messageText = imageInfo + (inputText || 'Обработайте эти изображения')
+      messageText = imageInfo + (inputText || 'Обраб��тайте эти изображения')
     }
 
     const userMessage: Message = {
@@ -470,7 +470,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
               <div className="message-content">
                 <div className="message-bubble">
                   {message.text.split('\n').map((line, index) => {
-                    // Проверяем, если строка содержит markdown изображение
+                    // Проверяем, если строка содержит markdown изображ��ние
                     const imageMatch = line.match(/!\[([^\]]*)\]\(([^)]+)\)/)
                     if (imageMatch) {
                       return (
@@ -526,7 +526,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
           <div className="image-preview-container">
             <div className="preview-header">
               <span className="preview-title">
-                📸 Загр��жено изображений: {previewImages.length}
+                Загружено изображений: {previewImages.length}
               </span>
               <button
                 className="clear-previews-btn"
