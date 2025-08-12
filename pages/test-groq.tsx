@@ -20,11 +20,11 @@ export default function TestGroq() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          messages: [{ role: 'user', content: 'Пр��вет! Проверяем работу GROQ API' }]
+          messages: [{ role: 'user', content: 'Привет! Проверяем работу GROQ API' }]
         }),
       })
 
-      setLogs(prev => prev + `Статус ответа: ${res.status}\n`)
+      setLogs(prev => prev + `Статус о��вета: ${res.status}\n`)
       setLogs(prev => prev + `Заголовки: ${JSON.stringify(Object.fromEntries(res.headers))}\n`)
 
       const data = await res.json()
@@ -73,6 +73,20 @@ export default function TestGroq() {
           color: '#c33'
         }}>
           <strong>Ошибка:</strong> {error}
+        </div>
+      )}
+
+      {logs && (
+        <div style={{
+          padding: '10px',
+          backgroundColor: '#f0f0f0',
+          border: '1px solid #ddd',
+          borderRadius: '5px',
+          marginBottom: '20px',
+          color: '#333'
+        }}>
+          <strong>Логи:</strong>
+          <pre style={{ whiteSpace: 'pre-wrap', marginTop: '10px', fontSize: '12px' }}>{logs}</pre>
         </div>
       )}
 
