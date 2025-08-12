@@ -165,6 +165,80 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
     }
   }
 
+  const handleImageUpload = async (files: FileList) => {
+    if (!files || files.length === 0) return
+
+    const imageFiles = Array.from(files).filter(file => file.type.startsWith('image/'))
+    if (imageFiles.length === 0) {
+      const errorMessage: Message = {
+        id: Date.now().toString(),
+        text: 'Пожалуйста, выберите изображения',
+        isUser: false,
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, errorMessage])
+      return
+    }
+
+    setIsUploadingFile(true)
+
+    try {
+      const uploadPromises = imageFiles.map(async (file) => {
+        const formData = new FormData()
+        formData.append('image', file)
+
+        const response = await fetch('/api/upload-image', {
+          method: 'POST',
+          body: formData
+        })
+
+        const data = await response.json()
+        return { file: file.name, url: data.url }
+      })
+
+      const uploadResults = await Promise.all(uploadPromises)
+
+      // Добавляем сообщение с загруженными изображениями
+      const imageMessage: Message = {
+        id: Date.now().toString(),
+        text: `🖼️ Загружено изображений: ${uploadResults.length}\n${uploadResults.map(r => r.file).join('\n')}`,
+        isUser: true,
+        timestamp: new Date()
+      }
+
+      // Сохраняем URLs изображений
+      setUploadedImages(prev => ({
+        ...prev,
+        [imageMessage.id]: uploadResults.map(r => r.url).join(',')
+      }))
+
+      setMessages(prev => [...prev, imageMessage])
+
+      // Если загружено 2 изображения, предлагаем примерку
+      if (uploadResults.length === 2) {
+        const suggestionMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          text: 'Отлично! Вы загрузили 2 изображения. Напишите "одень эту вещь на меня" для виртуальной примерки одежды! 👔✨',
+          isUser: false,
+          timestamp: new Date()
+        }
+        setMessages(prev => [...prev, suggestionMessage])
+      }
+
+    } catch (error) {
+      console.error('Image upload error:', error)
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: `Ошибка при загрузке изображений: ${error instanceof Error ? error.message : 'Неизвестная ошибка'}`,
+        isUser: false,
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, errorMessage])
+    } finally {
+      setIsUploadingFile(false)
+    }
+  }
+
   const handleFileUpload = async (file: File) => {
     if (!file || file.type !== 'application/pdf') {
       const errorMessage: Message = {
