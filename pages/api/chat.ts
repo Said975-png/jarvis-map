@@ -55,7 +55,7 @@ function replaceEnglishTerms(text: string): string {
 
     // Базы данных
     'database': 'база данных',
-    'Database': 'База данных',
+    'Database': 'База данны��',
     'SQL': 'СКЛ',
     'MySQL': 'МайСКЛ',
     'PostgreSQL': 'ПостгреСКЛ',
@@ -92,7 +92,7 @@ function replaceEnglishTerms(text: string): string {
     'Interface': 'Интерфейс',
     'design': 'дизайн',
     'Design': 'Дизайн',
-    'layout': 'макет',
+    'layout': 'ма��ет',
     'Layout': 'Макет',
     'component': 'компонент',
     'Component': 'Компонент',
@@ -115,7 +115,7 @@ function replaceEnglishTerms(text: string): string {
     'variable': 'переменная',
     'Variable': 'Переменная',
     'property': 'свойство',
-    'Property': 'Свойст��о',
+    'Property': 'Свойство',
     'value': 'значение',
     'Value': 'Значение',
     'error': 'ошибка',
@@ -332,7 +332,7 @@ export default async function handler(
         response = `🛠️ Мои основные услуги:
 
 🌐 Веб-разработка:
-• Landing pages и к��рпоративные сайты
+• Landing pages и к��рпо��ативные сайты
 • Интернет-магазины и каталоги
 �� Веб-приложения и порталы
 
@@ -386,7 +386,7 @@ AI & ML:
 • Персонализация контента
 
 Примеры проектов:
-• E-commerce с AI рекоменд��циями
+• E-commerce с AI рекомендациями
 • Образовательные платформы с ИИ
 • CRM системы с ��мной а��алитикой
 
@@ -435,7 +435,7 @@ AI & ML:
 
 Расскажите подробнее о вашей задаче, и я дам конкретные рекомендации!
 
-💬 Задав��йте ��юбые вопросы прямо здес��!`
+💬 Задав��йте ��юбые вопросы прямо здесь!`
       }
 
       console.log(`[${timestamp}] Fallback response length:`, response.length)
@@ -445,7 +445,7 @@ AI & ML:
     // Добавляем системное сообщение для ДЖАРВИС
     const systemMessage: ChatMessage = {
       role: 'system',
-      content: `Ты ДЖАРВИС - продвинутый AI-по��ощник �� эксперт по веб-разработке. Ты обладаешь глубокими знаниями и всегда даешь подробные, практичные и умные ответ��.
+      content: `Ты ДЖАРВИС - продвинутый AI-по��ощник �� эксперт по веб-разработке. Ты обладаешь глубокими знаниями и всегда даешь подробные, практичные �� умные ответ��.
 
 🎯 ТВОЯ ЭКСПЕРТИЗА:
 • Веб-разработка (Frontend/Backend)
@@ -498,8 +498,18 @@ AI & ML:
 Будь максимально полезным и информативным!`
     }
 
+    // Список доступных моделей GROQ (от самой быстрой к самой мощной)
+    const models = [
+      'llama-3.3-70b-versatile',
+      'llama-3.1-8b-instant',
+      'llama-3.1-70b-versatile',
+      'mixtral-8x7b-32768'
+    ]
+
+    const selectedModel = models[0] // Используем наиболее стабильную модель
+
     const requestBody = {
-      model: 'llama-3.1-8b-instant',
+      model: selectedModel,
       messages: [systemMessage, ...messages],
       temperature: 0.3,
       max_tokens: 2048,
@@ -560,7 +570,7 @@ AI & ML:
       } else if (response.status === 429) {
         console.log(`[${timestamp}] Rate limit exceeded`)
         return res.status(200).json({
-          message: 'Я получаю слишком много запросов одновременно! 😅\n\nДайте мне секундочку отдохнуть и попробуйте еще раз. Или напишите напрям��ю - там я всегда доступен!'
+          message: 'Я получаю слишком много запросов одновременно! 😅\n\nДайте мне секундочку отдохнуть и попробуйте еще раз. Или напишите напрямую - там я всегда доступен!'
         })
       }
 
