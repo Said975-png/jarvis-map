@@ -441,7 +441,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
             <div>
               <h3>ДЖАРВИС</h3>
               <div className="status-indicator">
-                В сети
+                В сет��
               </div>
             </div>
           </div>
@@ -555,7 +555,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
             </div>
             {previewImages.length === 2 && (
               <div className="tryon-hint">
-                💡 Напишите "одень эту вещь на меня" для виртуальной примерки!
+                Напишите "одень эту вещь на меня" для виртуальной примерки!
               </div>
             )}
           </div>
