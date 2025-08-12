@@ -188,7 +188,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       return data.message
     } catch (error) {
       console.error('Error calling AI API:', error)
-      return 'Я готов помочь! Попробуйте ещё раз, задав ваш вопрос. ��сли проблема повторится - задавайте вопросы прямо здесь в чате! 🚀'
+      return 'Я готов помочь! Попробуйте ещё раз, задав ваш вопрос. ��сли проблема повторится - задавайте вопросы прямо зд��сь в чате! 🚀'
     }
   }
 
@@ -345,19 +345,36 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
 
 
   const handleSendMessage = async () => {
-    if (!inputText.trim()) return
+    if (!inputText.trim() && previewImages.length === 0) return
+
+    let messageText = inputText
+
+    // Если есть превью изображения, добавляем их в сообщение
+    if (previewImages.length > 0) {
+      const imageInfo = `🖼️ Изображения (${previewImages.length}): ${previewImages.map((_, i) => `Фото ${i + 1}`).join(', ')}\n\n`
+      messageText = imageInfo + (inputText || 'Обработайте эти изображения')
+    }
 
     const userMessage: Message = {
       id: Date.now().toString(),
-      text: inputText,
+      text: messageText,
       isUser: true,
       timestamp: new Date()
     }
 
-    const currentInput = inputText
+    // Сохраняем изображения для этого сообщения
+    if (previewImages.length > 0) {
+      setUploadedImages(prev => ({
+        ...prev,
+        [userMessage.id]: previewImages.join(',')
+      }))
+    }
+
+    const currentInput = inputText || 'Обработайте эти изображения'
     const updatedMessages = [...messages, userMessage]
     setMessages(updatedMessages)
     setInputText('')
+    setPreviewImages([]) // Очищаем превью после отправки
     setIsTyping(true)
 
     try {
