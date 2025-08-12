@@ -218,7 +218,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       if (uploadResults.length === 2) {
         const suggestionMessage: Message = {
           id: (Date.now() + 1).toString(),
-          text: 'Отлично! Вы загрузили 2 изображения. Напишите "одень эту вещь на меня" для виртуальной примерки одежды! 👔✨',
+          text: 'Отлично! Вы загрузили 2 изображени��. Напишите "одень эту вещь на меня" для виртуальной примерки одежды! 👔✨',
           isUser: false,
           timestamp: new Date()
         }
@@ -254,7 +254,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
     if (file.size > 10 * 1024 * 1024) {
       const errorMessage: Message = {
         id: Date.now().toString(),
-        text: 'Размер файла не должен превышать 10MB',
+        text: 'Размер файла не должен превы��ать 10MB',
         isUser: false,
         timestamp: new Date()
       }
@@ -331,6 +331,12 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
   const openFileDialog = () => {
     if (!isTyping && !isUploadingFile && fileInputRef.current) {
       fileInputRef.current.click()
+    }
+  }
+
+  const openImageDialog = () => {
+    if (!isTyping && !isUploadingFile && imageInputRef.current) {
+      imageInputRef.current.click()
     }
   }
 
