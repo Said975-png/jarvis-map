@@ -124,8 +124,34 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
     }
   }, [isOpen])
 
-  const generateJarvisResponse = async (userMessage: string, conversationHistory: Message[]): Promise<string> => {
+  const generateJarvisResponse = async (userMessage: string, conversationHistory: Message[], messageId?: string): Promise<string> => {
     try {
+      // Проверяем, если это запрос на примерку одежды
+      const isTryOnRequest = userMessage.toLowerCase().includes('одень') ||
+                            userMessage.toLowerCase().includes('примерь') ||
+                            userMessage.toLowerCase().includes('надень')
+
+      if (isTryOnRequest && messageId && uploadedImages[messageId]) {
+        // Отправляем запрос на виртуальную примерку
+        const response = await fetch('/api/virtual-tryon', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            images: uploadedImages[messageId].split(','),
+            prompt: userMessage
+          }),
+        })
+
+        const data = await response.json()
+        if (data.success) {
+          return `Готово! Вот как будет выглядеть примерка:\n\n![Результат примерки](${data.resultImage})\n\nКак вам результат? 😊`
+        } else {
+          return 'Извините, произошла ошибка при обработке примерки. Попробуйте загрузить изображения заново.'
+        }
+      }
+
       const apiMessages = conversationHistory
         .filter(msg => msg.text !== 'При��ет! Я ДЖАРВИС, ваш AI-помощник. Чем могу помочь?')
         .map(msg => ({
