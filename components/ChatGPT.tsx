@@ -31,7 +31,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const sessionId = useRef(`session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`)
 
-  // Функция ��ля сохра��ения взаимодействия в базе знаний
+  // Функция ��ля сохра��ения ��заимодействия в базе знаний
   const saveInteractionToLearning = async (userMessage: string, botResponse: string, userMessageId: string) => {
     try {
       const response = await fetch('/api/learning', {
@@ -359,7 +359,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
 
     // Если есть превью изображения, добавляем их в сообщение
     if (previewImages.length > 0) {
-      const imageInfo = `🖼️ Изображения (${previewImages.length}): ${previewImages.map((_, i) => `Фото ${i + 1}`).join(', ')}\n\n`
+      const imageInfo = `Изображения (${previewImages.length}): ${previewImages.map((_, i) => `Фото ${i + 1}`).join(', ')}\n\n`
       messageText = imageInfo + (inputText || 'Обраб��тайте эти изображения')
     }
 
@@ -405,7 +405,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       
       const errorResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: 'Извините, произошла ошибка. Попр��буйте еще раз.',
+        text: 'Извините, произошла ошибка. Попр���буйте еще раз.',
         isUser: false,
         timestamp: new Date()
       }
@@ -470,7 +470,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
               <div className="message-content">
                 <div className="message-bubble">
                   {message.text.split('\n').map((line, index) => {
-                    // Проверяем, если строка содержит markdown изображ��ние
+                    // Проверяем, если строка содержит markdown изображ��н��е
                     const imageMatch = line.match(/!\[([^\]]*)\]\(([^)]+)\)/)
                     if (imageMatch) {
                       return (
