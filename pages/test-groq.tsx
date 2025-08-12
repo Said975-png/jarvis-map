@@ -4,6 +4,7 @@ export default function TestGroq() {
   const [response, setResponse] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [logs, setLogs] = useState('')
 
   const testGroq = async () => {
     setLoading(true)
