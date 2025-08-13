@@ -228,7 +228,7 @@ class LearningDatabase {
             preferredResponse: mostCommonResponse,
             confidence: interactionGroup.length / positiveInteractions.length,
             usageCount: interactionGroup.length,
-            successRate: 1.0, // Все взаимодействия положитель��ые
+            successRate: 1.0, // Все взаимодействия положительные
             lastUsed: new Date(),
             tags: this.extractTags(key)
           })

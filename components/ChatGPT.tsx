@@ -245,7 +245,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
     if (files && files.length > 0) {
       handleFileUpload(files[0])
     }
-    // Очищаем input для возможности повторной загрузки того же ф��йла
+    // Очищаем input для возможности повторной загрузки того же файла
     if (fileInputRef.current) {
       fileInputRef.current.value = ''
     }
