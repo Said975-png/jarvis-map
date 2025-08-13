@@ -61,10 +61,11 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       }
     } catch (error) {
       console.error('Error saving interaction for learning:', error)
+      // Не блокируем пользовательский интерфейс при ошибках сохранения
     }
   }
 
-  // Извлечение тегов из текста
+  // Извле��ение тегов из текста
   const extractTags = (text: string): string[] => {
     const commonTags = [
       'веб-разработка', 'дизайн', 'программирование', 'ai', 'технологии',
