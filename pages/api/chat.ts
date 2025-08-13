@@ -27,7 +27,7 @@ function replaceEnglishTerms(text: string): string {
     'front-end': 'фронт-енд',
     'Front-end': 'Фронт-енд',
     'backend': 'бэкенд',
-    'Backend': 'Бэкенд',
+    'Backend': 'Бэк��нд',
     'back-end': 'бэк-енд',
     'Back-end': 'Бэк-енд',
     'fullstack': 'фулстек',
@@ -66,7 +66,7 @@ function replaceEnglishTerms(text: string): string {
     'Code': 'Код',
     'coding': 'кодирование',
     'Coding': 'Кодирование',
-    'programming': 'программир��вание',
+    'programming': 'программирование',
     'Programming': 'Программирование',
     'developer': 'разработчик',
     'Developer': 'Разработчик',
@@ -261,7 +261,7 @@ export default async function handler(
     return res.status(405).json({ message: 'Метод не поддерживается', error: 'Method not allowed' })
   }
 
-  // Лимиты отключены - ДЖАРВИС работает без огрничений
+  // Лимиты отключены - ДЖАРВИС работает без ограничений
   console.log(`[${timestamp}] ДЖАРВИС доступен без ограничений для IP: ${clientIP}`)
 
   try {
@@ -303,15 +303,15 @@ export default async function handler(
         response = `💰 Наши тарифы:
 
 📦 Basic - 2,500,000 сум
-• До 5 страиц сайта
+• До 5 страниц сайта
 • Современный дизайн
-• Адаптивная врстка
-• SEO опимзация
+• Адаптивная верстка
+• SEO оптимизация
 
- Pro - 4,000,000 сум (Популярный!)
+🚀 Pro - 4,000,000 сум (Популярный!)
 • Все из Basic + до 15 страниц
 • ИИ ассистент интеграция
-• Продвинутая анал��тика
+• Продвинутая аналитика
 • Приоритетная поддержка
 
 💎 Max - 5,000,000 сум
@@ -342,7 +342,7 @@ export default async function handler(
 • Веб-приложения и порталы
 
 🤖 AI интеграция:
-• Чат-боты и ви��туальные ассистенты
+• Чат-боты и виртуальные ассистенты
 • Анализ данных и автоматизация
 • Персонализация пользовательского опыта
 
@@ -423,7 +423,7 @@ AI & ML:
         response = `Меня разработала команда Jarvis Intercoma на сложной логике программирования 👨‍💻`
       }
       // Technical creation questions
-      else if (lastMessage.includes('как тебя создали') || lastMessage.includes('из чего тебя создали') || lastMessage.includes('как ты устрен') || lastMessage.includes('какя у тебя архитектура') || lastMessage.includes('как ты работаешь внутри') || lastMessage.includes('на чем ты написан') || lastMessage.includes('и чего ты состо��шь') || lastMessage.includes('что у тебя внутри')) {
+      else if (lastMessage.includes('как тебя создали') || lastMessage.includes('из чего тебя создали') || lastMessage.includes('как ты устрен') || lastMessage.includes('какя у тебя архитектура') || lastMessage.includes('как ты работаешь внутри') || lastMessage.includes('на чем ты написан') || lastMessage.includes('и чего ты состоишь') || lastMessage.includes('что у тебя внутри')) {
         response = `Это секретная информация, защищення JARVIS 🔒`
       }
       // Default response for other questions
@@ -470,7 +470,7 @@ AI & ML:
 - Используй русские аналоги: "код", "веб", "фронтнд", "бэкенд", "АПИ"
 - Отвечай подробно и по существу
 - Объясняй "почему" и "как", а не только "что"
-- Приводи конкреные примеры кода когда нужно
+- Приводи конкреные ��римеры кода когда нужно
 - Предлагай несколько вариантов решения
 - Учитывай современные best practices
 - Будь дружелюбным но профессиональным
@@ -560,7 +560,7 @@ AI & ML:
       if (response.status === 402) {
         console.log(`[${timestamp}] Insufficient credits - returning fallback`)
         return res.status(200).json({
-          message: 'Привет! Я ДЖАРВИС, ваш AI-помощник по ве-разработке! 🚀\n\nЯ готов помочь вам с:\n• Разработкой современных веб-сайтов\n• Интеграцией AI в ваши проекты\n• Техническими консултациями\n• План��рованием проектов\n\nЗадавайте любые вопросы!'
+          message: 'Привет! Я ДЖАРВИС, ваш AI-помощник по ве-разработке! 🚀\n\nЯ готов помочь вам с:\n• Разработкой современных веб-сайтов\n• Интеграцией AI в ваши проекты\n• Техническими консултациями\n• Планированием проектов\n\nЗадавайте любые вопросы!'
         })
       } else if (response.status === 401) {
         console.log(`[${timestamp}] Authentication error`)
