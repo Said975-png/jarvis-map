@@ -204,7 +204,7 @@ function checkAndUpdateLimit(ip: string): { allowed: boolean; remaining: number 
 // Функция для удаления Markdown форматирования
 function cleanMarkdown(text: string): string {
   return text
-    // Убираем жирн��й текст **текст**
+    // Убираем жирный текст **текст**
     .replace(/\*\*([^*]+)\*\*/g, '$1')
     // Убираем курсив *текст*
     .replace(/\*([^*]+)\*/g, '$1')
@@ -261,7 +261,7 @@ export default async function handler(
     return res.status(405).json({ message: 'Метод не поддерживается', error: 'Method not allowed' })
   }
 
-  // Лимиты отключены - ДЖАРВИС работает без ограничений
+  // Лимиты отключены - ��ЖАРВИС работает без ограничений
   console.log(`[${timestamp}] ДЖАРВИС доступен без ограничений для IP: ${clientIP}`)
 
   try {
@@ -315,7 +315,7 @@ export default async function handler(
 • Приоритетная поддержка
 
 💎 Max - 5,000,000 сум
-• Безлимитные страницы
+• Безлимитные страни��ы
 • ДЖАРВИС ИИ полная версия
 • Индивидуальные решения
 • VIP поддержка 24/7
@@ -323,7 +323,7 @@ export default async function handler(
 Какой план вас интересует?`
       }
       // Contact information
-      else if (lastMessage.includes('контакт') || lastMessage.includes('связаться') || lastMessage.includes('telegram') || lastMessage.includes('тел��фон')) {
+      else if (lastMessage.includes('контакт') || lastMessage.includes('связаться') || lastMessage.includes('telegram') || lastMessage.includes('телефон')) {
         response = `📞 Свяжитесь со мной:
 
 • Онлайн-консультация: прямо здесь в чате
@@ -416,7 +416,7 @@ AI & ML:
 • LMS системы с AI
 • Интерактивные курсы
 
-Хотите увидеть демо или обсудить ваш проект?`
+Хотите увидеть демо или обсудить ��аш проект?`
       }
       // Creator questions
       else if (lastMessage.includes('кто тебя создал') || lastMessage.includes('кто твой создатель') || lastMessage.includes('кто разработал тебя') || lastMessage.includes('кто твой разработчик') || lastMessage.includes('кто твой автор')) {
@@ -491,7 +491,7 @@ AI & ML:
 • Pro (4,000,000 сум) - веб-приложения с AI интеграцией
 • Max (5,000,000 сум) - корпоративные и enterprise решения
 
-📞 КОНТАКТЫ: Онлайн-чат на сайте
+��� КОНТАКТЫ: Онлайн-чат на сайте
 
 ❗ КРИТИЧЕСКИ ВАЖНО:
 - Отвечай ТОЛЬКО на русском языке
