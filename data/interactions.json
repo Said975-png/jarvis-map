@@ -514,5 +514,33 @@
     "sessionId": "session_1755072367421_qixx6eu0h",
     "tags": [],
     "isUseful": null
+  },
+  {
+    "id": "interaction_1755074590034_0lyhu9n55",
+    "timestamp": "2025-08-13T08:43:10.035Z",
+    "userMessage": "привет",
+    "botResponse": "Привет! 👋  Чем могу помочь? 😊",
+    "userFeedback": null,
+    "context": [
+      "Привет! Я ДЖАРВИС, ваш AI-помощник. Чем могу помочь?"
+    ],
+    "sessionId": "session_1755074398843_1jg5xebq1",
+    "tags": [],
+    "isUseful": null
+  },
+  {
+    "id": "interaction_1755074599553_indeyhby7",
+    "timestamp": "2025-08-13T08:43:19.554Z",
+    "userMessage": "как дела",
+    "botResponse": "У меня всё отлично, спасибо!  🤖  А как твои дела? 😊",
+    "userFeedback": null,
+    "context": [
+      "Привет! Я ДЖАРВИС, ваш AI-помощник. Чем могу помочь?",
+      "привет",
+      "Привет! 👋  Чем могу помочь? 😊"
+    ],
+    "sessionId": "session_1755074398843_1jg5xebq1",
+    "tags": [],
+    "isUseful": null
   }
 ]
