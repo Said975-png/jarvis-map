@@ -172,8 +172,12 @@ export default function JarvisChat({ isOpen, onClose }: JarvisChatProps) {
 
       setMessages(prev => [...prev, aiResponse])
 
-      // Сохраняем взаимодействие для обучения
-      await saveInteractionToLearning(currentInput, aiText, aiResponse.id)
+      // Сохраняем взаимодействие для обучения только если ответ не пустой
+      if (aiText && aiText.trim().length > 0) {
+        await saveInteractionToLearning(currentInput, aiText, aiResponse.id)
+      } else {
+        console.log('Skipping learning save: empty AI response')
+      }
     } catch (error) {
       console.error('Error generating AI response:', error)
 
