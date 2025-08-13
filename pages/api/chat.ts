@@ -93,7 +93,7 @@ function replaceEnglishTerms(text: string): string {
     'design': 'дизайн',
     'Design': 'Дизайн',
     'layout': 'макет',
-    'Layout': 'Макет',
+    'Layout': '��акет',
     'component': 'компонент',
     'Component': 'Компонент',
     'function': 'функция',
@@ -149,7 +149,7 @@ interface UserLimit {
   resetTime: number
 }
 
-// Хранилище лимитов в ��амяти (в production лучше использовать Redis)
+// Хранилище лимитов в памяти (в production лучше использовать Redis)
 const userLimits = new Map<string, UserLimit>()
 const REQUESTS_LIMIT = 999999
 const RESET_PERIOD = 24 * 60 * 60 * 1000 // 24 часа в миллисекундах
@@ -303,7 +303,7 @@ export default async function handler(
         response = `💰 Наши тарифы:
 
 📦 Basic - 2,500,000 сум
-• До 5 страниц сайта
+• ��о 5 страниц сайта
 • Современный дизайн
 • Адаптивная верстка
 • SEO оптимизация
@@ -570,7 +570,7 @@ AI & ML:
       } else if (response.status === 429) {
         console.log(`[${timestamp}] Rate limit exceeded`)
         return res.status(200).json({
-          message: 'Я получаю слишком много запросов одновременно! 😅\n\nДайте мне секундочку отдохнуть и попробуйте еще раз. Или напишите напрямую - там я всегда доступен!'
+          message: 'Я получаю слишком много запросов одновременно! 😅\n\nДайте мне секундочку о��дохнуть и попробуйте еще раз. Или напишите напрямую - там я всегда доступен!'
         })
       }
 
@@ -626,7 +626,7 @@ AI & ML:
 • Техническая экспертиза
 • Оценка проектов
 
-📱 Онлайн-поддержка: Прямо здесь в чате
+📱 О��лайн-поддержка: Прямо здесь в чате
 
 Попробуйте еще раз!`
     
