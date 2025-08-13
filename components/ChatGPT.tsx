@@ -287,8 +287,12 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       const finalMessages = [...updatedMessages, aiResponse]
       setMessages(finalMessages)
 
-      // Сохраняем взаимодействие для обучения
-      await saveInteractionToLearning(currentInput, aiText, aiResponse.id)
+      // Сохраняем взаимодействие для обучения только если ответ не пустой
+      if (aiText && aiText.trim().length > 0) {
+        await saveInteractionToLearning(currentInput, aiText, aiResponse.id)
+      } else {
+        console.log('Skipping learning save: empty AI response')
+      }
     } catch (error) {
       console.error('Error generating AI response:', error)
       
