@@ -62,8 +62,16 @@ class LearningDatabase {
       let interactions: LearningInteraction[] = []
 
       if (fs.existsSync(filePath)) {
-        const data = fs.readFileSync(filePath, 'utf8')
-        interactions = JSON.parse(data)
+        try {
+          const data = fs.readFileSync(filePath, 'utf8')
+          interactions = JSON.parse(data)
+          console.log('Loaded existing interactions:', interactions.length)
+        } catch (parseError) {
+          console.error('Error parsing interactions.json, starting fresh:', parseError)
+          interactions = []
+        }
+      } else {
+        console.log('interactions.json does not exist, creating new')
       }
 
       interactions.push({
