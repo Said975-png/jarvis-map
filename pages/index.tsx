@@ -11,7 +11,7 @@ import ShineEffect from '../components/ShineEffect'
 import LoadingAnimation from '../components/LoadingAnimation'
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(false) // Временно отключаем
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     // Минимальное время загрузки для красивой анимации
@@ -34,7 +34,7 @@ export default function Home() {
     <>
       <Head>
         <title>Jarvis - умный ИИ ассистент</title>
-        <meta name="description" content="JARVIS - революционный ИИ-ассистент для ��оздания потрясающих веб-сайтов с использованием искусственного интеллекта" />
+        <meta name="description" content="JARVIS - революционный ИИ-ассистент для создания потрясающих веб-сайтов с использованием искусственного интеллекта" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="https://cdn.builder.io/api/v1/image/assets%2F321030175d41423db42a978adc722c81%2F37b07a37d18e47b9a7c20f69c11e21f0?format=webp&width=32" />
       </Head>
