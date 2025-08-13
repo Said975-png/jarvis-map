@@ -92,7 +92,7 @@ export default function JarvisChat({ isOpen, onClose }: JarvisChatProps) {
     try {
       // Подготавливаем историю сообщений для API
       const apiMessages = conversationHistory
-        .filter(msg => msg.text !== 'Привет! Я ДЖАРВИС, ваш AI-помощни�� в мире веб-разработки. Чем могу помочь?') // Исключаем начальное сообщение
+        .filter(msg => msg.text !== 'Привет! Я ДЖАРВИС, ваш AI-помощник в мире веб-разработки. Чем могу помочь?') // Исключаем начальное сообщение
         .map(msg => ({
           role: msg.isUser ? 'user' as const : 'assistant' as const,
           content: msg.text
