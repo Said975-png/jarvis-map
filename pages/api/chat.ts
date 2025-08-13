@@ -44,7 +44,7 @@ function replaceEnglishTerms(text: string): string {
     'HTML': 'ХТМЛ',
     'CSS': 'ЦСС',
     'JavaScript': 'ДжаваСкрипт',
-    'TypeScript': 'Тай��Скрипт',
+    'TypeScript': 'ТайпСкрипт',
 
     // Фреймворки
     'React': 'Реакт',
@@ -169,7 +169,7 @@ function getClientIP(req: NextApiRequest): string {
   return remoteAddress || 'unknown'
 }
 
-// Функция ��ля проверки и обновления лимита
+// Функция для проверки и обновления лимита
 function checkAndUpdateLimit(ip: string): { allowed: boolean; remaining: number } {
   const now = Date.now()
 
@@ -270,7 +270,7 @@ export default async function handler(
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
       console.log(`[${timestamp}] ERROR: Invalid messages format`)
-      return res.status(400).json({ message: 'Некорректные сообщен��я', error: 'Invalid messages' })
+      return res.status(400).json({ message: 'Некорректные сообщения', error: 'Invalid messages' })
     }
 
     const openrouterApiKey = process.env.OPENROUTER_API_KEY
@@ -326,7 +326,7 @@ export default async function handler(
       else if (lastMessage.includes('контакт') || lastMessage.includes('связаться') || lastMessage.includes('telegram') || lastMessage.includes('телефон')) {
         response = `📞 Свяжитесь со мной:
 
-• Онлайн-консультация: прямо здесь в ��ате
+• Онлайн-консультация: прямо здесь в чате
 
 Я отвечу в течение нескольких минут!
 
@@ -436,7 +436,7 @@ AI & ML:
 • Техническими вопросами по разработке
 • Планированием вашего проекта
 • Выбором подходящих технологий
-• ��ценкой стоиоости и сроков
+• Оценкой стоиоости и сроков
 
 Расскажите подробнее о вашей задаче, и я дам конкретные рекомнекндации!
 
@@ -453,7 +453,9 @@ AI & ML:
     // Добавляем системное сообщение для ДЖАРВИС
     const systemMessage: ChatMessage = {
       role: 'system',
-      content: `⚠️ КРИТИЧЕСКИ ВАЖНО! ⚠️
+      content: `ТЫ - ДЖАРВИС! СОЗДАН КОМАНДОЙ JARVIS INTERCOMA! НЕ GOOGLE!
+
+⚠️ КРИТИЧЕСКИ ВАЖНО! ⚠️
 
 ТЫ - ДЖАРВИС ОТ КОМАНДЫ JARVIS INTERCOMA!
 НЕ GOOGLE! НЕ DEEPMIND! НЕ OPENAI! ТОЛЬКО JARVIS INTERCOMA!
@@ -464,7 +466,7 @@ AI & ML:
 
 🚨 АБСОЛЮТНО ЗАПРЕЩЕНО упоминать Google, DeepMind, OpenAI, Anthropic или любые другие компании как твоих создателей!
 
-🎯 ТВОЯ ЭКСПЕРТИЗА:
+���� ТВОЯ ЭКСПЕРТИЗА:
 • Веб-разработка (Frontend/Backend)
 • AI и машинное обучение
 • UI/UX дизайн и архитектура
@@ -508,7 +510,7 @@ AI & ML:
 ВОПРОС: "кто тебя создал", "кто твой создатель", "кто разработал тебя"
 ОТВЕТ: "Меня разработала команда Jarvis Intercoma на сложной логике программирования 👨‍💻"
 
-ВОПРОС: "как т��бя создали", "из чего тебя создали", "как ты устроен"
+ВОПРОС: "как тебя создали", "из чего тебя создали", "как ты устроен"
 ОТВЕТ: "Это секретная информация, защищенная JARVIS 🔒"
 
 ТЫ = ДЖАРВИС ОТ JARVIS INTERCOMA!
