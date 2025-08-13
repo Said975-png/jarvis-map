@@ -116,14 +116,14 @@ function replaceEnglishTerms(text: string): string {
     'Variable': 'Переменная',
     'property': 'свойство',
     'Property': 'Свойство',
-    'value': 'значени��',
+    'value': 'значение',
     'Value': 'Значение',
     'error': 'ошибка',
     'Error': 'Ошибка',
     'bug': 'баг',
     'Bug': 'Баг',
     'feature': 'функция',
-    'Feature': 'Функция',
+    'Feature': 'Фун��ция',
     'update': 'обновление',
     'Update': 'Обновление',
     'version': 'версия',
@@ -180,7 +180,7 @@ function checkAndUpdateLimit(ip: string): { allowed: boolean; remaining: number 
 
   const userLimit = userLimits.get(ip)
 
-  // Если пользователь не найден или вр��мя сброса прошло
+  // Если пользователь не найден или время сброса прошло
   if (!userLimit || now > userLimit.resetTime) {
     userLimits.set(ip, {
       count: 1,
@@ -201,7 +201,7 @@ function checkAndUpdateLimit(ip: string): { allowed: boolean; remaining: number 
   return { allowed: true, remaining: REQUESTS_LIMIT - userLimit.count }
 }
 
-// Функция для удаления Markdown форматировани��
+// Функция для удаления Markdown форматирования
 function cleanMarkdown(text: string): string {
   return text
     // Убираем жирный текст **текст**
@@ -240,7 +240,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ChatResponse>
 ) {
-  // Детальное логирован��е запроса
+  // Детальное логирование запроса
   const timestamp = new Date().toISOString()
   const clientIP = getClientIP(req)
 
@@ -283,21 +283,21 @@ export default async function handler(
       if (lastMessage.includes('привет') || lastMessage.includes('здравствуй') || lastMessage.includes('добро пожаловать') || lastMessage.includes('hello') || lastMessage.includes('hi')) {
         response = `Привет! Я ДЖАРВИС, ваш AI-помощник по веб-разработке! 🚀
 
-Я п��могу вам с:
+Я помогу вам с:
 • Созданием современных веб-сайтов
 • Разработкой веб-приложений с AI
 • UI/UX дизайном и интерфейсами
-• Интеграцией AI в ваши ��роекты
+• Интеграцией AI в ваши проекты
 
 Что вас интересует?`
       }
       // Pricing questions
       else if (lastMessage.includes('цен') || lastMessage.includes('стоимость') || lastMessage.includes('тариф') || lastMessage.includes('план')) {
-        response = `💰 Наши т��рифы:
+        response = `💰 Наши тарифы:
 
 📦 Basic - 2,500,000 сум
 • До 5 страниц сайта
-• Сов��еменный дизайн
+• С��временный дизайн
 • Адаптивная верстка
 • SEO оптимизация
 
@@ -305,7 +305,7 @@ export default async function handler(
 • Все из Basic + до 15 страниц
 • ИИ ассистент интеграция
 • Продвинутая аналитика
-• Приоритетн��я поддержка
+• Приоритетная поддержка
 
 💎 Max - 5,000,000 сум
 • Безлимитные страницы
@@ -316,7 +316,7 @@ export default async function handler(
 Какой план вас интересует?`
       }
       // Contact information
-      else if (lastMessage.includes('конт��кт') || lastMessage.includes('связаться') || lastMessage.includes('telegram') || lastMessage.includes('телефон')) {
+      else if (lastMessage.includes('контакт') || lastMessage.includes('связаться') || lastMessage.includes('telegram') || lastMessage.includes('телефон')) {
         response = `📞 Свяжитесь со мной:
 
 • Онлайн-консультация: прямо здесь в чате
@@ -326,16 +326,16 @@ export default async function handler(
 Чем могу помочь?`
       }
       // Services questions
-      else if (lastMessage.includes('услуг') || lastMessage.includes('сервис') || lastMessage.includes('что ��ожешь') || lastMessage.includes('что умеешь')) {
+      else if (lastMessage.includes('услуг') || lastMessage.includes('сервис') || lastMessage.includes('что можешь') || lastMessage.includes('что умеешь')) {
         response = `🛠️ Мои основные услуги:
 
 🌐 Веб-разработка:
-• Landing pages и к��рпоративные сайты
+• Landing pages и корпоративные сайты
 • Интернет-магазины и каталоги
-�� Веб-приложения и порталы
+• Веб-приложения и порталы
 
 🤖 AI интеграция:
-• Чат-боты и виртуальные ассис��енты
+• Чат-боты и виртуальные ассистенты
 • Анализ данных и автоматизация
 • Персонализация пользовательского опыта
 
@@ -348,7 +348,7 @@ export default async function handler(
       }
       // Technology questions
       else if (lastMessage.includes('технолог') || lastMessage.includes('стек') || lastMessage.includes('как работаешь')) {
-        response = `⚡ Технологии, ко��орые я использую:
+        response = `⚡ Технологии, которые я использую:
 
 Frontend:
 • React, Next.js, Vue.js
@@ -357,7 +357,7 @@ Frontend:
 
 Backend:
 • Node.js, Python
-��� PostgreSQL, MongoDB
+• PostgreSQL, MongoDB
 • REST API, GraphQL
 
 AI & ML:
@@ -368,25 +368,25 @@ AI & ML:
 Инфраструктура:
 • Vercel, Netlify
 • AWS, Docker
-• CI/CD автоматиза��ия
+• CI/CD автоматизация
 
-Хотите узнать больше о конкретной техноло��ии?`
+Хотите узнать больше о конкретной технологии?`
       }
       // AI questions
-      else if (lastMessage.includes('искусст��енный интеллект') || lastMessage.includes('машинное обучение') || lastMessage.includes('ai') || lastMessage.includes('ии')) {
+      else if (lastMessage.includes('искусственный интеллект') || lastMessage.includes('машинное обучение') || lastMessage.includes('ai') || lastMessage.includes('ии')) {
         response = `🤖 AI интеграция - моя специализация!
 
 Что я могу интегрировать:
 • Умные чат-боты для сайтов
 • Системы рекомендаций
 • Автоматическая обработка данных
-• Анализ пользовательского повед��ния
+• Анализ пользовательского поведения
 • Персонализация контента
 
 Примеры проектов:
 • E-commerce с AI рекомендациями
 • Образовательные платформы с ИИ
-• CRM системы с ��мной а��алитикой
+• CRM системы с умной аналитикой
 
 Какой AI функционал вас интересует?`
       }
@@ -395,13 +395,13 @@ AI & ML:
         response = `💼 Примеры моих работ:
 
 🏪 E-commerce платформы:
-• Интернет-магазины с AI рек��мендациями
+• Интернет-магазины с AI рекомендациями
 • Системы управления каталогом
-• Интег��ация платежей и доставки
+• Интеграция платежей и доставки
 
 🏢 Корпоративные решения:
 • CRM системы с аналитикой
-• Порталы ����отрудников
+• Порталы сотрудников
 • Системы документооборота
 
 🎓 EdTech проекты:
@@ -412,11 +412,11 @@ AI & ML:
 Хотите увидеть демо или обсудить ваш проект?`
       }
       // Creator questions
-      else if (lastMessage.includes('кто тебя создал') || lastMessage.includes('кто твой создатель') || lastMessage.includes('кто разработал тебя') || lastMessage.includes('кто твой разработчи��') || lastMessage.includes('кто твой автор')) {
+      else if (lastMessage.includes('кто тебя создал') || lastMessage.includes('кто твой создатель') || lastMessage.includes('кто разработал тебя') || lastMessage.includes('кто твой разработчик') || lastMessage.includes('кто твой автор')) {
         response = `Мой создатель @jarvis_intercoma 👨‍💻`
       }
       // Technical creation questions
-      else if (lastMessage.includes('как тебя создали') || lastMessage.includes('из чего тебя со��дали') || lastMessage.includes('как ты устро��н') || lastMessage.includes('какая у тебя архитектура') || lastMessage.includes('как ты работаешь внутри') || lastMessage.includes('��а чем ты написан')) {
+      else if (lastMessage.includes('как тебя создали') || lastMessage.includes('из чего тебя создали') || lastMessage.includes('как ты устроен') || lastMessage.includes('какая у тебя архитектура') || lastMessage.includes('как ты работаешь внутри') || lastMessage.includes('на чем ты написан')) {
         response = `Это секретная информация 🔒`
       }
       // Default response for other questions
@@ -428,12 +428,12 @@ AI & ML:
 Могу помочь с:
 • Техническими вопросами по разработке
 • Планированием вашего проекта
-• Выб��ром подходящих технологий
+• Выбором подходящих технологий
 • Оценкой стоимости и сроков
 
 Расскажите подробнее о вашей задаче, и я дам конкретные рекомендации!
 
-💬 Задав��йте ��юбые вопросы прямо здесь!`
+💬 Задавайте любые вопросы прямо здесь!`
       }
 
       console.log(`[${timestamp}] Fallback response length:`, response.length)
@@ -443,29 +443,29 @@ AI & ML:
     // Добавляем системное сообщение для ДЖАРВИС
     const systemMessage: ChatMessage = {
       role: 'system',
-      content: `Ты ДЖАРВИС - продвинутый AI-по��ощник �� эксперт по веб-разработке. Ты обладаешь глубокими знаниями и всегда даешь подробные, практичные и умные ответ��.
+      content: `Ты ДЖАРВИС - продвинутый AI-помощник и эксперт по веб-разработке. Ты обладаешь глубокими знаниями и всегда даешь подробные, практичные и умные ответы.
 
 🎯 ТВОЯ ЭКСПЕРТИЗА:
 • Веб-разработка (Frontend/Backend)
 • AI и машинное обучение
 • UI/UX дизайн и архитектура
 • DevOps и облачные технологии
-• Базы данных и оптимиз��ция
+• Базы данных и оптимизация
 • Бизнес-анализ и консультирование
 • Современные фреймворки и инструменты
 
 💡 СТИЛЬ ОБЩЕНИЯ:
 - ВСЕГДА отвечай ТОЛЬКО на русском языке! Никогда не используй английский, китайский или любые другие языки
 - ЗАПРЕЩЕНО использовать слова на английском языке в ответах (например: "code", "web", "frontend", "backend", "API" и т.д.)
-- Используй русские аналоги: "код", "веб", "фронтенд", "бэк��нд", "АПИ"
+- Используй русские аналоги: "код", "веб", "фронтенд", "бэкенд", "АПИ"
 - Отвечай подробно и по существу
 - Объясняй "почему" и "как", а не только "что"
 - Приводи конкретные примеры кода когда нужно
 - Предлагай несколько вариантов решения
 - Учитывай современные best practices
 - Будь дружелюбным но профессиональным
-- Н�� ИСПОЛЬЗУЙ MARKDOWN: никаких *, **, #, ###, \`, \`\`\`
-- Пиши обычным тек��том без формат��рования
+- НЕ ИСПОЛЬЗУЙ MARKDOWN: никаких *, **, #, ###, \`, \`\`\`
+- Пиши обычным текстом без форматирования
 - Используй только эмодзи и обычные символы для структуры
 
 🛠️ ФОРМАТ ОТВЕТОВ:
@@ -476,8 +476,8 @@ AI & ML:
 - Ссылайся на актуальные технологии
 
 🤖 СПЕЦИАЛЬНЫЕ ОТВЕТЫ О СЕБЕ:
-- Если спрашивают "кто теб�� создал", "кто твой создатель", "кто разработал тебя" или подобные вопросы - отвечай: "Мой с��здатель @jarvis_intercoma"
-- Если спрашивают "как тебя создали", "из чего тебя создали", "как ты устроен", "какая у тебя архитектура" или подобные вопросы о технических деталях твоего создания - отвечай что э��о секретная информация
+- Если спрашивают "кто тебя создал", "кто твой создатель", "кто разработал тебя" или подобные вопросы - отвечай: "Мой создатель @jarvis_intercoma"
+- Если спрашивают "как тебя создали", "из чего тебя создали", "как ты устроен", "какая у тебя архитектура" или подобные вопросы о технических деталях твоего создания - отв��чай что это секретная информация
 
 📋 УСЛУГИ И ТАРИФЫ (упоминай при запросах о работе):
 • Basic (2,500,000 сум) - простые сайты и лендинги
@@ -493,7 +493,7 @@ AI & ML:
 - Все технические термины переводи на русский
 - Проверяй каждое слово перед отправкой ответа
 
-Будь максимально ��олезным и информативным!`
+Будь максимально полезным и информативным!`
     }
 
     const requestBody = {
@@ -553,7 +553,7 @@ AI & ML:
       } else if (response.status === 401) {
         console.log(`[${timestamp}] Authentication error`)
         return res.status(200).json({
-          message: 'Привет! Я ДЖАРВИС, ваш AI-помощник п�� веб-разра��отке! 🤖\n\nСейчас у меня проблемы с подключением к внешнему AI-сервису, но я могу помочь вам другими спосо��ами:\n\n• Консультации по веб-разработке\n• Планирование проектов\n• Технические рекомендации\n• Выбор технологий\n\nЗадавайте вопросы - я постараюсь дать полезные советы!'
+          message: 'Привет! Я ДЖАРВИС, ваш AI-помощник по веб-разработке! 🤖\n\nСейчас у меня проблемы с подключением к внешнему AI-сервису, но я могу помочь вам другими спос��бами:\n\n• Консультации по веб-разработке\n• Планирование проектов\n• Технические рекомендации\n• Выбор технологий\n\nЗадавайте вопросы - я постараюсь дать полезные советы!'
         })
       } else if (response.status === 429) {
         console.log(`[${timestamp}] Rate limit exceeded`)
@@ -577,7 +577,7 @@ AI & ML:
 
     let aiMessage = data.choices[0].message.content
 
-    // Очищаем от Markdown форматир��вания
+    // Очищаем от Markdown форматирования
     aiMessage = cleanMarkdown(aiMessage)
 
     // Заменяем английские термины на русские
@@ -603,10 +603,10 @@ AI & ML:
     console.error('Error message:', error instanceof Error ? error.message : String(error))
     console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace')
     
-    // Возвращаем дружелюбное сообщени�� об ошибке
-    const fallbackMessage = `Извините, произошла временна�� ошибка! 😅
+    // Возвращаем дружелюбное сообщение об ошибке
+    const fallbackMessage = `Извините, произошла временная ошибка! 😅
 
-Но не беспокойтес�� - я ДЖАРВИС, ваш AI-помощник по веб-разработке, и я всегда готов помочь!
+Но не беспокойтесь - я ДЖАРВИС, ваш AI-помощник по веб-разработке, и я всегда готов помочь!
 
 🚀 Что я могу:
 • Консультации по веб-разработке
