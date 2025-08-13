@@ -48,7 +48,7 @@ async function analyzePdfContent(pdfText: string): Promise<string> {
 - Пиши подробно но по существу
 - Выделяй важную информацию
 - НЕ используй markdown форматирование
-- Отвечай ТО��ЬКО на русском языке
+- Отвечай ТОЛЬКО на русском языке
 
 🎯 БУДЬ МАКСИМАЛЬНО ТОЧНЫМ И ПОЛЕЗНЫМ!`
   }
@@ -153,7 +153,7 @@ export default async function handler(
     }
 
     // Ограничиваем размер текста для API
-    const maxTextLength = 15000 // Примерно 3000 токенов
+    const maxTextLength = 15000 // Примерно 3000 токено��
     const truncatedText = pdfText.length > maxTextLength 
       ? pdfText.substring(0, maxTextLength) + '\n\n[Текст обрезан из-за ограничений размера...]'
       : pdfText
