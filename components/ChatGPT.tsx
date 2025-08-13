@@ -125,7 +125,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
   const generateJarvisResponse = async (userMessage: string, conversationHistory: Message[]): Promise<string> => {
     try {
       const apiMessages = conversationHistory
-        .filter(msg => msg.text !== 'При��ет! Я ДЖАРВИС, ваш AI-помощник. Чем могу помочь?')
+        .filter(msg => msg.text !== 'Привет! Я ДЖАРВИС, ваш AI-помощник. Чем могу помочь?')
         .map(msg => ({
           role: msg.isUser ? 'user' as const : 'assistant' as const,
           content: msg.text
@@ -235,7 +235,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
     if (files && files.length > 0) {
       handleFileUpload(files[0])
     }
-    // Очищаем input для возможности повторной загруз��и того же файла
+    // Очищаем input для возможности повторной загрузки того же файла
     if (fileInputRef.current) {
       fileInputRef.current.value = ''
     }
@@ -284,7 +284,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       
       const errorResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: 'Извините, произошла ошибка. Попр��буйте еще раз.',
+        text: 'Извините, произошла ошибка. Попробуйте еще раз.',
         isUser: false,
         timestamp: new Date()
       }
@@ -420,7 +420,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Сообщение ДЖАРВИСУ..."
+              placeholder="Сообщение ДЖ��РВИСУ..."
               className="jarvis-textarea"
               rows={1}
               disabled={isTyping || isUploadingFile}
