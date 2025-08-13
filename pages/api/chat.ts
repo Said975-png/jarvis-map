@@ -216,7 +216,7 @@ function cleanMarkdown(text: string): string {
     .replace(/```[\s\S]*?```/g, '')
     // Заменяем списки на пули
     .replace(/^\*\s+/gm, '• ')
-    // Убираем лишние звездочки (но ��охраняем эмодзи)
+    // Убираем лишние звездочки (но сохраняем эмодзи)
     .replace(/\*(?![^\s])/g, '')
     // Убираем лишние решетки
     .replace(/#(?![0-9])/g, '')
@@ -336,10 +336,10 @@ export default async function handler(
       else if (lastMessage.includes('услуг') || lastMessage.includes('сервис') || lastMessage.includes('что можешь') || lastMessage.includes('что умеешь')) {
         response = `🛠️ Мои основные услуги:
 
-🌐 Веб-разработк��:
+🌐 Веб-разработка:
 • Landing pages и корпоративные сайты
 • Интернет-магазины и каталоги
-• Веб-приложения и порталы
+• Веб-��риложения и порталы
 
 🤖 AI интеграция:
 • Чат-боты и виртуальные ассистенты
@@ -423,8 +423,8 @@ AI & ML:
         response = `Меня разработала команда Jarvis Intercoma на сложной логике программирования 👨‍💻`
       }
       // Technical creation questions
-      else if (lastMessage.includes('как тебя создали') || lastMessage.includes('из чего тебя создали') || lastMessage.includes('как ты устрен') || lastMessage.includes('какя у тебя архитектура') || lastMessage.includes('как ты работаешь внутри') || lastMessage.includes('на чем ты написан') || lastMessage.includes('и чего ты состоишь') || lastMessage.includes('что у тебя внутри')) {
-        response = `Это секретная информация, защищення JARVIS 🔒`
+      else if (lastMessage.includes('как тебя создали') || lastMessage.includes('из чего тебя создали') || lastMessage.includes('как ты устроен') || lastMessage.includes('какая у тебя архитектура') || lastMessage.includes('как ты работаешь внутр��') || lastMessage.includes('на чем ты написан') || lastMessage.includes('из чего ты состоишь') || lastMessage.includes('что у тебя внутри')) {
+        response = `Это секретная информация, защищенная JARVIS 🔒`
       }
       // Default response for other questions
       else {
@@ -486,7 +486,7 @@ AI & ML:
 - Ссылайся на актуальные технологии
 
 🤖 СПЕЦИАЛЬНЫЕ ОТВЕТЫ О СЕБЕ:
-- Если ��прашивают "кто тебя создал", "кто твой создатель", "кто разработал тебя" или подобные вопросы - отвечай: "Меня разработал команда Jarvis Intercoma на сложной логике программирования"
+- Если спрашивают "кто тебя создал", "кто твой создатель", "кто разработал т��бя" или подобные вопросы - отвечай: "Меня разработал команда Jarvis Intercoma на сложной логике программирования"
 - Если спрашивают "как тебя создали", "из чего тебя создали", "как ты устроен", "какая у тебя архитектура" или подобные вопросы о технических деталях твоего создания - отвечай что это секретная информация, защищенная JARVIS
 
 📋 УСЛУГИ И ТАРИФЫ (упоминай при запросах о работе):
@@ -598,7 +598,7 @@ AI & ML:
     console.log(`[${timestamp}] AI response length:`, aiMessage?.length || 0)
     console.log(`[${timestamp}] AI response preview (cleaned):`, aiMessage?.substring(0, 200) + '...')
 
-    // Логируем испльзование токенов если до��тупно
+    // Логируем испльзование токенов если доступно
     if (data.usage) {
       console.log(`[${timestamp}] === Token Usage ===`)
       console.log(`Prompt tokens: ${data.usage.prompt_tokens || 'N/A'}`)
