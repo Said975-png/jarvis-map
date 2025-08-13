@@ -238,10 +238,10 @@ export default function JarvisChat({ isOpen, onClose }: JarvisChatProps) {
               )}
               <div className="message-content">
                 <div className="message-bubble">
-                  {message.text.split('\n').map((line, index) => (
+                  {message.text.trim().split('\n').filter(line => line.trim()).map((line, index) => (
                     <div key={index}>
-                      {line}
-                      {index < message.text.split('\n').length - 1 && <br />}
+                      {line.trim()}
+                      {index < message.text.trim().split('\n').filter(line => line.trim()).length - 1 && <br />}
                     </div>
                   ))}
                 </div>

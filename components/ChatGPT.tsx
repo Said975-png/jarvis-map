@@ -13,7 +13,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: 'Привет! Я ДЖАРВИС, ваш AI-помощник. Чем могу помочь?',
+      text: 'Привет! Я ДЖАРВИС, ваш AI-по��ощник. Чем могу помочь?',
       isUser: false,
       timestamp: new Date()
     }
@@ -159,7 +159,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       return data.message
     } catch (error) {
       console.error('Error calling AI API:', error)
-      return 'Я готов помочь! Попробуйте ещё раз, задав ваш вопрос. Если проблема повторится - задавайте вопросы прямо здесь в чате! 🚀'
+      return 'Я го��ов помочь! Попробуйте ещё раз, задав ваш вопрос. Если проблема повторится - задавайте вопросы прямо здесь в чате! 🚀'
     }
   }
 
@@ -284,7 +284,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       
       const errorResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: 'Извините, произошла ошибка. Попробуйте еще раз.',
+        text: 'Извините, произошла ошибка. П��пробуйте еще раз.',
         isUser: false,
         timestamp: new Date()
       }
@@ -348,10 +348,10 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
               )}
               <div className="message-content">
                 <div className="message-bubble">
-                  {message.text.split('\n').map((line, index) => (
+                  {message.text.trim().split('\n').filter(line => line.trim()).map((line, index) => (
                     <div key={index}>
-                      {line}
-                      {index < message.text.split('\n').length - 1 && <br />}
+                      {line.trim()}
+                      {index < message.text.trim().split('\n').filter(line => line.trim()).length - 1 && <br />}
                     </div>
                   ))}
                 </div>
