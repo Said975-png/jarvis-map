@@ -99,7 +99,7 @@ function replaceEnglishTerms(text: string): string {
     'function': 'функция',
     'Function': 'Функция',
     'method': 'метод',
-    'Method': 'Метод',
+    'Method': 'Ме��од',
     'class': 'класс',
     'Class': 'Класс',
     'object': 'объект',
@@ -123,7 +123,7 @@ function replaceEnglishTerms(text: string): string {
     'bug': 'баг',
     'Bug': 'Баг',
     'feature': 'функция',
-    'Feature': 'Фун��ция',
+    'Feature': 'Функция',
     'update': 'обновление',
     'Update': 'Обновление',
     'version': 'версия',
@@ -218,7 +218,7 @@ function cleanMarkdown(text: string): string {
     .replace(/^\*\s+/gm, '• ')
     // Убираем лишние звездочки (но сохраняем эмодзи)
     .replace(/\*(?![^\s])/g, '')
-    // Убираем лишние решетки
+    // Убираем лишние реше��ки
     .replace(/#(?![0-9])/g, '')
 }
 
@@ -266,11 +266,11 @@ export default async function handler(
       return res.status(400).json({ message: 'Некорректные сообщения', error: 'Invalid messages' })
     }
 
-    const groqApiKey = process.env.GROQ_API_KEY
-    console.log(`[${timestamp}] GROQ API Key available:`, !!groqApiKey)
-    console.log(`[${timestamp}] API Key prefix:`, groqApiKey ? groqApiKey.substring(0, 15) + '...' : 'N/A')
+    const openrouterApiKey = process.env.OPENROUTER_API_KEY
+    console.log(`[${timestamp}] OpenRouter API Key available:`, !!openrouterApiKey)
+    console.log(`[${timestamp}] API Key prefix:`, openrouterApiKey ? openrouterApiKey.substring(0, 20) + '...' : 'N/A')
 
-    if (!groqApiKey) {
+    if (!openrouterApiKey) {
       console.log(`[${timestamp}] Fallback: Using local JARVIS responses`)
       
       // Local JARVIS logic when API key is not configured
@@ -297,7 +297,7 @@ export default async function handler(
 
 📦 Basic - 2,500,000 сум
 • До 5 страниц сайта
-• С��временный дизайн
+• Современный дизайн
 • Адаптивная верстка
 • SEO оптимизация
 
@@ -407,7 +407,7 @@ AI & ML:
 🎓 EdTech проекты:
 • Образовательные платформы
 • LMS системы с AI
-• Интерактивные курсы
+• Интерактивны�� курсы
 
 Хотите увидеть демо или обсудить ваш проект?`
       }
@@ -426,7 +426,7 @@ AI & ML:
 Я ДЖАРВИС, специализируюсь на веб-разработке и AI интеграции.
 
 Могу помочь с:
-• Техническими вопросами по разработке
+• Техничес��ими вопросами по разработке
 • Планированием вашего проекта
 • Выбором подходящих технологий
 • Оценкой стоимости и сроков
@@ -451,7 +451,7 @@ AI & ML:
 • UI/UX дизайн и архитектура
 • DevOps и облачные технологии
 • Базы данных и оптимизация
-• Бизнес-анализ и консультирование
+• Биз��ес-анализ и консультирование
 • Современные фреймворки и инструменты
 
 💡 СТИЛЬ ОБЩЕНИЯ:
@@ -477,12 +477,12 @@ AI & ML:
 
 🤖 СПЕЦИАЛЬНЫЕ ОТВЕТЫ О СЕБЕ:
 - Если спрашивают "кто тебя создал", "кто твой создатель", "кто разработал тебя" или подобные вопросы - отвечай: "Мой создатель @jarvis_intercoma"
-- Если спрашивают "как тебя создали", "из чего тебя создали", "как ты устроен", "какая у тебя архитектура" или подобные вопросы о технических деталях твоего создания - отв��чай что это секретная информация
+- Если спрашивают "как тебя создали", "из чего тебя создали", "как ты устроен", "какая у тебя архитектура" или подобные вопросы о технических деталях твоего создания - отвечай что это секретная информация
 
 📋 УСЛУГИ И ТАРИФЫ (упоминай при запросах о работе):
 • Basic (2,500,000 сум) - простые сайты и лендинги
 • Pro (4,000,000 сум) - веб-приложения с AI интеграцией
-• Max (5,000,000 сум) - корпоративные и enterprise решения
+• Max (5,000,000 ��ум) - корпоративные и enterprise решения
 
 📞 КОНТАКТЫ: Онлайн-чат на сайте
 
@@ -497,7 +497,7 @@ AI & ML:
     }
 
     const requestBody = {
-      model: 'llama-3.1-8b-instant',
+      model: 'mistralai/mixtral-8x7b-instruct:free',
       messages: [systemMessage, ...messages],
       temperature: 0.3,
       max_tokens: 2048,
@@ -506,7 +506,7 @@ AI & ML:
       presence_penalty: 0.1
     }
 
-    console.log(`[${timestamp}] === GROQ REQUEST ===`)
+    console.log(`[${timestamp}] === OPENROUTER REQUEST ===`)
     console.log(`Model: ${requestBody.model}`)
     console.log(`Max tokens: ${requestBody.max_tokens}`)
     console.log(`Temperature: ${requestBody.temperature}`)
@@ -515,24 +515,26 @@ AI & ML:
     console.log(`User messages: ${messages.length}`)
 
     const requestStartTime = Date.now()
-    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${groqApiKey}`,
-        'Content-Type': 'application/json'
+        'Authorization': `Bearer ${openrouterApiKey}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://jarvis-ai-web.vercel.app',
+        'X-Title': 'JARVIS AI Web'
       },
       body: JSON.stringify(requestBody)
     })
 
     const requestDuration = Date.now() - requestStartTime
-    console.log(`[${timestamp}] === GROQ RESPONSE ===`)
+    console.log(`[${timestamp}] === OPENROUTER RESPONSE ===`)
     console.log(`Status: ${response.status}`)
     console.log(`Request duration: ${requestDuration}ms`)
     console.log(`Content-Type: ${response.headers.get('content-type')}`)
 
     if (!response.ok) {
       const errorData = await response.text()
-      console.error(`[${timestamp}] === GROQ ERROR ===`)
+      console.error(`[${timestamp}] === OPENROUTER ERROR ===`)
       console.error(`Status: ${response.status}`)
       console.error(`Status Text: ${response.statusText}`)
       console.error(`Error Data:`, errorData)
@@ -553,7 +555,7 @@ AI & ML:
       } else if (response.status === 401) {
         console.log(`[${timestamp}] Authentication error`)
         return res.status(200).json({
-          message: 'Привет! Я ДЖАРВИС, ваш AI-помощник по веб-разработке! 🤖\n\nСейчас у меня проблемы с подключением к внешнему AI-сервису, но я могу помочь вам другими спос��бами:\n\n• Консультации по веб-разработке\n• Планирование проектов\n• Технические рекомендации\n• Выбор технологий\n\nЗадавайте вопросы - я постараюсь дать полезные советы!'
+          message: 'Привет! Я ДЖАРВИС, ваш AI-помощник по веб-разработке! 🤖\n\nСейчас у меня проблемы с подключением к внешнему AI-сервису, но я могу помочь вам другими способами:\n\n• Консультации по веб-разработке\n• Планирование проектов\n• Технические рекомендации\n• Выбор технологий\n\nЗадавайте вопросы - я постараюсь дать полезные советы!'
         })
       } else if (response.status === 429) {
         console.log(`[${timestamp}] Rate limit exceeded`)
@@ -562,7 +564,7 @@ AI & ML:
         })
       }
 
-      throw new Error(`GROQ API error: ${response.status} - ${errorData}`)
+      throw new Error(`OpenRouter API error: ${response.status} - ${errorData}`)
     }
 
     const data = await response.json()
@@ -572,7 +574,7 @@ AI & ML:
 
     if (!data.choices || !data.choices[0] || !data.choices[0].message) {
       console.error(`[${timestamp}] Invalid response structure:`, data)
-      throw new Error('Invalid response from GROQ')
+      throw new Error('Invalid response from OpenRouter')
     }
 
     let aiMessage = data.choices[0].message.content
