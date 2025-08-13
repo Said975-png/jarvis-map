@@ -124,7 +124,7 @@ export default function JarvisChatEnhanced({ isOpen, onClose }: JarvisChatProps)
       
       const fallbackResponses = [
         'Извините, у меня временные проблемы с подключением к AI-серверу. Попробуйте еще раз через несколько секунд.',
-        'Сейчас исп��тываю технические трудности, но я ДЖАРВИС и готов помочь! Попробуйте переформулировать вопрос.',
+        'Сейчас испытываю технические трудности, но я ДЖАРВИС и готов помочь! Попробуйте переформулировать вопрос.',
         'Произошла ошибка связи, но не волнуйтесь - я здесь. Напишите мне в Telegram  для прямой связи.',
       ]
       
@@ -304,10 +304,10 @@ export default function JarvisChatEnhanced({ isOpen, onClose }: JarvisChatProps)
                 )}
                 <div className="message-content">
                   <div className="message-bubble">
-                    {message.text.split('\n').map((line, index) => (
+                    {message.text.trim().split('\n').filter(line => line.trim()).map((line, index) => (
                       <div key={index}>
-                        {line}
-                        {index < message.text.split('\n').length - 1 && <br />}
+                        {line.trim()}
+                        {index < message.text.trim().split('\n').filter(line => line.trim()).length - 1 && <br />}
                       </div>
                     ))}
                   </div>

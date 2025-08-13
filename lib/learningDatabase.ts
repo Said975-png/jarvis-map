@@ -54,18 +54,34 @@ class LearningDatabase {
   // Сохранение взаимодействия
   async saveInteraction(interaction: LearningInteraction): Promise<void> {
     try {
+      console.log('=== SAVING TO FILE ===')
+      console.log('Interaction object:', JSON.stringify(interaction, null, 2))
+
       const filePath = this.getFilePath('interactions.json')
+      console.log('File path:', filePath)
       let interactions: LearningInteraction[] = []
 
       if (fs.existsSync(filePath)) {
-        const data = fs.readFileSync(filePath, 'utf8')
-        interactions = JSON.parse(data)
+        try {
+          const data = fs.readFileSync(filePath, 'utf8')
+          interactions = JSON.parse(data)
+          console.log('Loaded existing interactions:', interactions.length)
+        } catch (parseError) {
+          console.error('Error parsing interactions.json, starting fresh:', parseError)
+          interactions = []
+        }
+      } else {
+        console.log('interactions.json does not exist, creating new')
       }
 
-      interactions.push({
+      // Убеждаемся что timestamp правильного типа
+      const interactionToSave = {
         ...interaction,
-        timestamp: new Date()
-      })
+        timestamp: interaction.timestamp instanceof Date ? interaction.timestamp : new Date(interaction.timestamp)
+      }
+
+      interactions.push(interactionToSave)
+      console.log('Added interaction, total:', interactions.length)
 
       // Ограничиваем размер файла (последние 1000 взаимодействий)
       if (interactions.length > 1000) {

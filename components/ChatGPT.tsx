@@ -31,6 +31,11 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
   // Функция для сохранения взаимодействия в базе знаний
   const saveInteractionToLearning = async (userMessage: string, botResponse: string, userMessageId: string) => {
     try {
+      console.log('=== SAVING INTERACTION TO LEARNING ===')
+      console.log('userMessage:', userMessage)
+      console.log('botResponse:', botResponse)
+      console.log('sessionId:', sessionId.current)
+
       const response = await fetch('/api/learning', {
         method: 'POST',
         headers: {
@@ -46,17 +51,22 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
         }),
       })
 
-      const data = await response.json()
-      if (data.success) {
-        // Сохраняем ID взаимодействия для связи с сообщением
-        setInteractionIds(prev => ({
-          ...prev,
-          [userMessageId]: data.data.interactionId
-        }))
-        console.log('Interaction saved for learning:', data.data.interactionId)
+      if (response.ok) {
+        const data = await response.json()
+        if (data.success) {
+          // Сохраняем ID взаимодействия для связи с сообщением
+          setInteractionIds(prev => ({
+            ...prev,
+            [userMessageId]: data.data.interactionId
+          }))
+          console.log('Interaction saved for learning:', data.data.interactionId)
+        }
+      } else {
+        console.error('Failed to save interaction, status:', response.status)
       }
     } catch (error) {
       console.error('Error saving interaction for learning:', error)
+      // Не блокируем пользовательский интерфейс при ошибках сохранения
     }
   }
 
@@ -125,7 +135,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
   const generateJarvisResponse = async (userMessage: string, conversationHistory: Message[]): Promise<string> => {
     try {
       const apiMessages = conversationHistory
-        .filter(msg => msg.text !== 'При��ет! Я ДЖАРВИС, ваш AI-помощник. Чем могу помочь?')
+        .filter(msg => msg.text !== 'Привет! Я ДЖАРВИС, ваш AI-помощник. Чем могу помочь?')
         .map(msg => ({
           role: msg.isUser ? 'user' as const : 'assistant' as const,
           content: msg.text
@@ -154,6 +164,12 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       
       if (data.error) {
         throw new Error(data.error)
+      }
+
+      // Проверяем что ответ не пустой
+      if (!data.message || data.message.trim().length === 0) {
+        console.warn('Empty response from API, using fallback')
+        return 'Извините, я получил пустой ответ. Попробуйте переформулировать вопрос! 🤔'
       }
 
       return data.message
@@ -235,7 +251,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
     if (files && files.length > 0) {
       handleFileUpload(files[0])
     }
-    // Очищаем input для возможности повторной загруз��и того же файла
+    // Очищаем input для возможности повторной загрузки того же файла
     if (fileInputRef.current) {
       fileInputRef.current.value = ''
     }
@@ -277,14 +293,18 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       const finalMessages = [...updatedMessages, aiResponse]
       setMessages(finalMessages)
 
-      // Сохраняем взаимодействие для обучения
-      await saveInteractionToLearning(currentInput, aiText, aiResponse.id)
+      // Сохраняем взаимодействие для обучения только если ответ не пустой
+      if (aiText && aiText.trim().length > 0) {
+        await saveInteractionToLearning(currentInput, aiText, aiResponse.id)
+      } else {
+        console.log('Skipping learning save: empty AI response')
+      }
     } catch (error) {
       console.error('Error generating AI response:', error)
       
       const errorResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: 'Извините, произошла ошибка. Попр��буйте еще раз.',
+        text: 'Извините, произошла ошибка. Попробуйте еще раз.',
         isUser: false,
         timestamp: new Date()
       }
@@ -348,10 +368,10 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
               )}
               <div className="message-content">
                 <div className="message-bubble">
-                  {message.text.split('\n').map((line, index) => (
+                  {message.text.trim().split('\n').filter(line => line.trim()).map((line, index) => (
                     <div key={index}>
-                      {line}
-                      {index < message.text.split('\n').length - 1 && <br />}
+                      {line.trim()}
+                      {index < message.text.trim().split('\n').filter(line => line.trim()).length - 1 && <br />}
                     </div>
                   ))}
                 </div>

@@ -14,10 +14,10 @@ export default function LoadingAnimation({ onLoadingComplete }: LoadingAnimation
       setProgress(prev => {
         if (prev >= 100) {
           clearInterval(progressInterval)
-          setTimeout(onLoadingComplete, 500) // Задержка перед скрытием
+          setTimeout(() => onLoadingComplete(), 500) // Задержка перед скрытием
           return 100
         }
-        return prev + Math.random() * 15 + 5 // Рандомный прогресс как в ChatGPT
+        return Math.min(prev + Math.random() * 15 + 5, 100) // Рандомный прогресс как в ChatGPT
       })
     }, 100)
 

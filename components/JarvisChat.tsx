@@ -47,16 +47,21 @@ export default function JarvisChat({ isOpen, onClose }: JarvisChatProps) {
         }),
       })
 
-      const data = await response.json()
-      if (data.success) {
-        setInteractionIds(prev => ({
-          ...prev,
-          [aiMessageId]: data.data.interactionId
-        }))
-        console.log('Interaction saved for learning:', data.data.interactionId)
+      if (response.ok) {
+        const data = await response.json()
+        if (data.success) {
+          setInteractionIds(prev => ({
+            ...prev,
+            [aiMessageId]: data.data.interactionId
+          }))
+          console.log('Interaction saved for learning:', data.data.interactionId)
+        }
+      } else {
+        console.error('Failed to save interaction, status:', response.status)
       }
     } catch (error) {
       console.error('Error saving interaction for learning:', error)
+      // Не блокируем пользовательский интерфейс при ошибках сохранения
     }
   }
 
@@ -92,7 +97,7 @@ export default function JarvisChat({ isOpen, onClose }: JarvisChatProps) {
     try {
       // Подготавливаем историю сообщений для API
       const apiMessages = conversationHistory
-        .filter(msg => msg.text !== 'Привет! Я ДЖАРВИС, ваш AI-помощни�� в мире веб-разработки. Чем могу помочь?') // Исключаем начальное сообщение
+        .filter(msg => msg.text !== 'Привет! Я ДЖАРВИС, ваш AI-помощник в мире веб-разработки. Чем могу помочь?') // Исключаем начальное сообщение
         .map(msg => ({
           role: msg.isUser ? 'user' as const : 'assistant' as const,
           content: msg.text
@@ -124,13 +129,19 @@ export default function JarvisChat({ isOpen, onClose }: JarvisChatProps) {
         throw new Error(data.error)
       }
 
+      // Проверяем что ответ не пустой
+      if (!data.message || data.message.trim().length === 0) {
+        console.warn('Empty response from API, using fallback')
+        return 'Извините, я получил пустой ответ. Попробуйте переформулировать вопрос! 🤔'
+      }
+
       return data.message
     } catch (error) {
       console.error('Error calling AI API:', error)
 
       // Резервные ответы в случае ошибки
       const fallbackResponses = [
-        'Я ДЖАРВИС и я здесь, чтобы помочь! Попробуйте ещё раз. Если проблемы повторяются - опишите ваш вопрос подробнее! ��',
+        'Я ДЖАРВИС и я здесь, чтобы помочь! Попробуйте ещё раз. Если проблемы повторяются - опишите ваш вопрос подробнее! 🚀',
         'Привет! Я ДЖАРВИС и всегда готов помочь с веб-разработкой! Попробуйте переформулировать вопрос или задайте новый! ✨',
         'Я готов ответить на любые вопросы о веб-разработке и AI! Попробуйте снова. 🔧',
       ]
@@ -167,8 +178,12 @@ export default function JarvisChat({ isOpen, onClose }: JarvisChatProps) {
 
       setMessages(prev => [...prev, aiResponse])
 
-      // Сохраняем взаимодействие для обучения
-      await saveInteractionToLearning(currentInput, aiText, aiResponse.id)
+      // Сохраняем взаимодействие для обучения только если ответ не пустой
+      if (aiText && aiText.trim().length > 0) {
+        await saveInteractionToLearning(currentInput, aiText, aiResponse.id)
+      } else {
+        console.log('Skipping learning save: empty AI response')
+      }
     } catch (error) {
       console.error('Error generating AI response:', error)
 
@@ -238,10 +253,10 @@ export default function JarvisChat({ isOpen, onClose }: JarvisChatProps) {
               )}
               <div className="message-content">
                 <div className="message-bubble">
-                  {message.text.split('\n').map((line, index) => (
+                  {message.text.trim().split('\n').filter(line => line.trim()).map((line, index) => (
                     <div key={index}>
-                      {line}
-                      {index < message.text.split('\n').length - 1 && <br />}
+                      {line.trim()}
+                      {index < message.text.trim().split('\n').filter(line => line.trim()).length - 1 && <br />}
                     </div>
                   ))}
                 </div>

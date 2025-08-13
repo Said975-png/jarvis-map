@@ -74,12 +74,28 @@ async function handleGet(req: NextApiRequest, res: NextApiResponse<LearningApiRe
 
 async function saveInteractionHandler(req: NextApiRequest, res: NextApiResponse<LearningApiResponse>) {
   try {
+    console.log('=== SAVE INTERACTION DEBUG ===')
+    console.log('Request body:', JSON.stringify(req.body, null, 2))
+
     const { userMessage, botResponse, sessionId, context = [], tags = [] } = req.body
 
-    if (!userMessage || !botResponse || !sessionId) {
+    console.log('Extracted fields:')
+    console.log('- userMessage:', userMessage)
+    console.log('- botResponse:', botResponse)
+    console.log('- sessionId:', sessionId)
+
+    // Более детальная валидация
+    const isValidString = (str: any) => typeof str === 'string' && str.trim().length > 0
+
+    if (!isValidString(userMessage) || !isValidString(botResponse) || !isValidString(sessionId)) {
+      console.log('VALIDATION FAILED: Missing or invalid required fields')
+      console.log('- userMessage valid:', isValidString(userMessage), typeof userMessage, userMessage)
+      console.log('- botResponse valid:', isValidString(botResponse), typeof botResponse, botResponse)
+      console.log('- sessionId valid:', isValidString(sessionId), typeof sessionId, sessionId)
+
       return res.status(400).json({
         success: false,
-        error: 'Missing required fields: userMessage, botResponse, sessionId'
+        error: `Missing or invalid required fields. userMessage: ${isValidString(userMessage)}, botResponse: ${isValidString(botResponse)}, sessionId: ${isValidString(sessionId)}`
       })
     }
 
