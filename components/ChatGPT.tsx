@@ -46,14 +46,18 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
         }),
       })
 
-      const data = await response.json()
-      if (data.success) {
-        // Сохраняем ID взаимодействия для связи с сообщением
-        setInteractionIds(prev => ({
-          ...prev,
-          [userMessageId]: data.data.interactionId
-        }))
-        console.log('Interaction saved for learning:', data.data.interactionId)
+      if (response.ok) {
+        const data = await response.json()
+        if (data.success) {
+          // Сохраняем ID взаимодействия для связи с сообщением
+          setInteractionIds(prev => ({
+            ...prev,
+            [userMessageId]: data.data.interactionId
+          }))
+          console.log('Interaction saved for learning:', data.data.interactionId)
+        }
+      } else {
+        console.error('Failed to save interaction, status:', response.status)
       }
     } catch (error) {
       console.error('Error saving interaction for learning:', error)
