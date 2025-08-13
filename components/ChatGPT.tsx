@@ -420,7 +420,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Сообщение ДЖ��РВИСУ..."
+              placeholder="Сообщение ДЖАРВИСУ..."
               className="jarvis-textarea"
               rows={1}
               disabled={isTyping || isUploadingFile}
