@@ -1,9 +1,17 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function TestChat() {
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState('Привет! Ты работаешь на OpenRouter?')
   const [response, setResponse] = useState('')
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    // Автоматически запускаем тест через 1 секунду
+    const timer = setTimeout(() => {
+      testChat()
+    }, 1000)
+    return () => clearTimeout(timer)
+  }, [])
 
   const testChat = async () => {
     setLoading(true)
