@@ -89,8 +89,8 @@ function replaceEnglishTerms(text: string): string {
     'user': 'пользователь',
     'User': 'Пользователь',
     'interface': 'интерфейс',
-    'Interface': 'Ин��ерфейс',
-    'design': 'дизайн',
+    'Interface': 'Интерфейс',
+    'design': 'ди��айн',
     'Design': 'Дизайн',
     'layout': 'макет',
     'Layout': 'Макет',
@@ -134,7 +134,7 @@ function replaceEnglishTerms(text: string): string {
 
   let result = text
 
-  // П��именяем замены только для цельных слов
+  // Применяем замены только для цельных слов
   for (const [english, russian] of Object.entries(replacements)) {
     const regex = new RegExp(`\\b${english}\\b`, 'g')
     result = result.replace(regex, russian)
@@ -173,7 +173,7 @@ function getClientIP(req: NextApiRequest): string {
 function checkAndUpdateLimit(ip: string): { allowed: boolean; remaining: number } {
   const now = Date.now()
 
-  // Периодическая очистка старых записей (каждые 100 запросов)
+  // Периодическая очистка старых запис��й (каждые 100 запросов)
   if (Math.random() < 0.01) {
     cleanupExpiredLimits(now)
   }
@@ -247,7 +247,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ChatResponse>
 ) {
-  // Детальное логи��ование запроса
+  // Детальное логирование запроса
   const timestamp = new Date().toISOString()
   const clientIP = getClientIP(req)
 
@@ -402,7 +402,7 @@ AI & ML:
         response = `💼 Примеры моих работ:
 
 🏪 E-commerce платформы:
-• Интернет-ма��азины с AI рекомендациями
+• Интернет-магазины с AI рекоменда��иями
 • Системы управления каталогом
 • онтеграция платежей и доставки
 
@@ -472,7 +472,7 @@ AI & ML:
 • UI/UX дизайн и архитектура
 • DevOps и облачные технологии
 • Базы данных и оптимизация
-• Бизне��-анализ и консультирование
+• Бизнес-анализ и консульти��ование
 • Современные фреймворки и инструменты
 
 💡 СТИЛЬ ОБЩЕНИЯ:
@@ -487,7 +487,7 @@ AI & ML:
 - Будь дружелюбным но профессиональным
 - НЕ ИСПОЛЬЗУЙ MARKDOWN: никаких *, **, #, ###, \`, \`\`\`
 - Пиши обычным текстом без форматирования
-- Используй только эмодзи и обычные ��имволы влеля структуры
+- Используй только эмодзи и обычные символы влеля структуры
 
 🛠️ ФОРМАТ ОТВЕТОВ:
 - Структурируй информацию четко
@@ -539,7 +539,7 @@ AI & ML:
     const requestBody = {
       model: 'google/gemma-2-9b-it:free',
       messages: [systemMessage, ...messages],
-      temperature: 0.3,
+      temperature: 0.1,
       max_tokens: 2048,
       top_p: 0.9,
       frequency_penalty: 0.1,
