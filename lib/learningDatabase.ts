@@ -54,7 +54,11 @@ class LearningDatabase {
   // Сохранение взаимодействия
   async saveInteraction(interaction: LearningInteraction): Promise<void> {
     try {
+      console.log('=== SAVING TO FILE ===')
+      console.log('Interaction object:', JSON.stringify(interaction, null, 2))
+
       const filePath = this.getFilePath('interactions.json')
+      console.log('File path:', filePath)
       let interactions: LearningInteraction[] = []
 
       if (fs.existsSync(filePath)) {
