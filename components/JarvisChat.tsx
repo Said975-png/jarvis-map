@@ -70,7 +70,7 @@ export default function JarvisChat({ isOpen, onClose }: JarvisChatProps) {
     const commonTags = [
       'веб-разработка', 'дизайн', 'программирование', 'ai', 'технологии',
       'фронтенд', 'бэкенд', 'react', 'javascript', 'typescript', 'css',
-      'html', 'api', 'база данных', 'сеть', 'безопа��ность'
+      'html', 'api', 'база данных', 'сеть', 'безопасность'
     ]
 
     const lowerText = text.toLowerCase()
