@@ -61,7 +61,7 @@ function replaceEnglishTerms(text: string): string {
     'PostgreSQL': 'ПостгреСКЛ',
     'MongoDB': 'МонгоДБ',
 
-    // Общие терм����ы
+    // Общие термины
     'code': 'код',
     'Code': 'Код',
     'coding': 'кодирование',
@@ -143,7 +143,7 @@ function replaceEnglishTerms(text: string): string {
   return result
 }
 
-// Система лимитов запросов
+// Система ли��итов запросов
 interface UserLimit {
   count: number
   resetTime: number
@@ -308,7 +308,7 @@ export default async function handler(
 • Адаптивная в��рстка
 • SEO оп��им��зация
 
-🚀 Pro - 4,000,000 сум (Популярный!)
+���� Pro - 4,000,000 сум (Популярный!)
 • Все из Basic + до 15 страниц
 • ИИ ассистент интеграция
 • Продвинутая аналитика
@@ -403,7 +403,7 @@ AI & ML:
 
 🏪 E-commerce платформы:
 • Интернет-магазины с AI р��комендац��ями
-• ��истемы управления каталогом
+• ��и��темы управления каталогом
 • Интеграция платежей и доставки
 
 🏢 Корпоративные решения:
@@ -423,7 +423,7 @@ AI & ML:
         response = `Меня разработала команда Jarvis Intercoma на сложной логике программирования 👨‍💻`
       }
       // Technical creation questions
-      else if (lastMessage.includes('как тебя создали') || lastMessage.includes('из чего тебя создали') || lastMessage.includes('как ты устр��ен') || lastMessage.includes('какая у тебя архитектура') || lastMessage.includes('как ты работаешь внутри') || lastMessage.includes('на чем ты написан') || lastMessage.includes('и�� чего ты состоишь') || lastMessage.includes('что у тебя внутри')) {
+      else if (lastMessage.includes('как тебя создали') || lastMessage.includes('из чего тебя создали') || lastMessage.includes('как ты устр��ен') || lastMessage.includes('как��я у тебя архитектура') || lastMessage.includes('как ты работаешь внутри') || lastMessage.includes('на чем ты написан') || lastMessage.includes('и�� чего ты состоишь') || lastMessage.includes('что у тебя внутри')) {
         response = `Это секретная информация, защищенн��я JARVIS 🔒`
       }
       // Default response for other questions
@@ -622,7 +622,7 @@ AI & ML:
 
 🚀 Что я могу:
 • Консультации по веб-разработке
-• Планирова��ие AI-проектов
+• Планирова��ие AI-проек��ов
 • Техническая экспертиза
 • Оценка проектов
 
