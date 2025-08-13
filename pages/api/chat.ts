@@ -14,7 +14,7 @@ interface ChatResponse {
   error?: string
 }
 
-// Функция для замены английских терминов на русские
+// Функция для замены английских терминов на русс��ие
 function replaceEnglishTerms(text: string): string {
   const replacements: { [key: string]: string } = {
     // Основные веб-термины
@@ -57,7 +57,7 @@ function replaceEnglishTerms(text: string): string {
     'database': 'база данных',
     'Database': 'База данных',
     'SQL': 'СКЛ',
-    'MySQL': 'МайСКЛ',
+    'MySQL': 'Май��КЛ',
     'PostgreSQL': 'ПостгреСКЛ',
     'MongoDB': 'МонгоДБ',
 
@@ -303,7 +303,7 @@ export default async function handler(
         response = `💰 Наши тарифы:
 
 📦 Basic - 2,500,000 сум
-• ��о 5 страниц сайта
+• До 5 стра��иц сайта
 • Современный дизайн
 • Адаптивная в��рстка
 • SEO оп��им��зация
@@ -333,7 +333,7 @@ export default async function handler(
 Чем могу помочь?`
       }
       // Services questions
-      else if (lastMessage.includes('услуг') || lastMessage.includes('сервис') || lastMessage.includes('что можешь') || lastMessage.includes('что умеешь')) {
+      else if (lastMessage.includes('услуг') || lastMessage.includes('сервис') || lastMessage.includes('что можешь') || lastMessage.includes('что умееш��')) {
         response = `🛠️ Мои основные услуги:
 
 🌐 Веб-разработка:
@@ -399,7 +399,7 @@ AI & ML:
       }
       // Portfolio/examples
       else if (lastMessage.includes('портфолио') || lastMessage.includes('примеры') || lastMessage.includes('работы') || lastMessage.includes('проекты')) {
-        response = `💼 Примеры моих работ:
+        response = `💼 Примеры ��оих работ:
 
 🏪 E-commerce платформы:
 • Интернет-магазины с AI р��комендац��ями
@@ -499,7 +499,7 @@ AI & ML:
 ❗ КРИТИЧЕСКИ ВАЖНО:
 - Отвечай ТОЛЬКО на русском языке
 - Никогда не переходи на английский или другие языки
-- Если пользователь пишет на другом языке - отвечай на русском
+- Если пользователь пишет на д��угом языке - отвечай на русском
 - Все технические термины переводи на русский
 - Проверяй каждое слово перед отправкой ответа
 
