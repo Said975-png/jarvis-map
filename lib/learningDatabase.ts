@@ -74,10 +74,14 @@ class LearningDatabase {
         console.log('interactions.json does not exist, creating new')
       }
 
-      interactions.push({
+      // Убеждаемся что timestamp правильного типа
+      const interactionToSave = {
         ...interaction,
-        timestamp: new Date()
-      })
+        timestamp: interaction.timestamp instanceof Date ? interaction.timestamp : new Date(interaction.timestamp)
+      }
+
+      interactions.push(interactionToSave)
+      console.log('Added interaction, total:', interactions.length)
 
       // Ограничиваем размер файла (последние 1000 взаимодействий)
       if (interactions.length > 1000) {
@@ -224,7 +228,7 @@ class LearningDatabase {
             preferredResponse: mostCommonResponse,
             confidence: interactionGroup.length / positiveInteractions.length,
             usageCount: interactionGroup.length,
-            successRate: 1.0, // Все взаимодействия положительные
+            successRate: 1.0, // Все взаимодействия положитель��ые
             lastUsed: new Date(),
             tags: this.extractTags(key)
           })
