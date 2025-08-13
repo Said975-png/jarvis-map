@@ -86,7 +86,7 @@ function replaceEnglishTerms(text: string): string {
     'Mobile': 'Мобильный',
     'desktop': 'десктоп',
     'Desktop': 'Десктоп',
-    'user': 'пользов��тель',
+    'user': 'пользователь',
     'User': 'Пользователь',
     'interface': 'интерфейс',
     'Interface': 'Интерфейс',
@@ -116,7 +116,7 @@ function replaceEnglishTerms(text: string): string {
     'Variable': 'Переменная',
     'property': 'свойство',
     'Property': 'Свойство',
-    'value': 'значение',
+    'value': 'значени��',
     'Value': 'Значение',
     'error': 'ошибка',
     'Error': 'Ошибка',
@@ -201,7 +201,7 @@ function checkAndUpdateLimit(ip: string): { allowed: boolean; remaining: number 
   return { allowed: true, remaining: REQUESTS_LIMIT - userLimit.count }
 }
 
-// Функция для удаления Markdown форматирования
+// Функция для удаления Markdown форматировани��
 function cleanMarkdown(text: string): string {
   return text
     // Убираем жирный текст **текст**
@@ -357,7 +357,7 @@ Frontend:
 
 Backend:
 • Node.js, Python
-• PostgreSQL, MongoDB
+��� PostgreSQL, MongoDB
 • REST API, GraphQL
 
 AI & ML:
@@ -416,7 +416,7 @@ AI & ML:
         response = `Мой создатель @jarvis_intercoma 👨‍💻`
       }
       // Technical creation questions
-      else if (lastMessage.includes('как тебя создали') || lastMessage.includes('из чего тебя создали') || lastMessage.includes('как ты устро��н') || lastMessage.includes('какая у тебя архитектура') || lastMessage.includes('как ты работаешь внутри') || lastMessage.includes('��а чем ты написан')) {
+      else if (lastMessage.includes('как тебя создали') || lastMessage.includes('из чего тебя со��дали') || lastMessage.includes('как ты устро��н') || lastMessage.includes('какая у тебя архитектура') || lastMessage.includes('как ты работаешь внутри') || lastMessage.includes('��а чем ты написан')) {
         response = `Это секретная информация 🔒`
       }
       // Default response for other questions
@@ -457,7 +457,7 @@ AI & ML:
 💡 СТИЛЬ ОБЩЕНИЯ:
 - ВСЕГДА отвечай ТОЛЬКО на русском языке! Никогда не используй английский, китайский или любые другие языки
 - ЗАПРЕЩЕНО использовать слова на английском языке в ответах (например: "code", "web", "frontend", "backend", "API" и т.д.)
-- Используй русские аналоги: "код", "веб", "фронтенд", "бэкенд", "АПИ"
+- Используй русские аналоги: "код", "веб", "фронтенд", "бэк��нд", "АПИ"
 - Отвечай подробно и по существу
 - Объясняй "почему" и "как", а не только "что"
 - Приводи конкретные примеры кода когда нужно
@@ -476,7 +476,7 @@ AI & ML:
 - Ссылайся на актуальные технологии
 
 🤖 СПЕЦИАЛЬНЫЕ ОТВЕТЫ О СЕБЕ:
-- Если спрашивают "кто теб�� создал", "кто твой создатель", "кто разработал тебя" или подобные вопросы - отвечай: "Мой создатель @jarvis_intercoma"
+- Если спрашивают "кто теб�� создал", "кто твой создатель", "кто разработал тебя" или подобные вопросы - отвечай: "Мой с��здатель @jarvis_intercoma"
 - Если спрашивают "как тебя создали", "из чего тебя создали", "как ты устроен", "какая у тебя архитектура" или подобные вопросы о технических деталях твоего создания - отвечай что э��о секретная информация
 
 📋 УСЛУГИ И ТАРИФЫ (упоминай при запросах о работе):
@@ -493,7 +493,7 @@ AI & ML:
 - Все технические термины переводи на русский
 - Проверяй каждое слово перед отправкой ответа
 
-Будь максимально полезным и информативным!`
+Будь максимально ��олезным и информативным!`
     }
 
     const requestBody = {
