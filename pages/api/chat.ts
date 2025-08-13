@@ -14,7 +14,7 @@ interface ChatResponse {
   error?: string
 }
 
-// Функция для замены английских терминов на русс��ие
+// Функция для замены английских терминов на руссие
 function replaceEnglishTerms(text: string): string {
   const replacements: { [key: string]: string } = {
     // Основные веб-термины
@@ -57,7 +57,7 @@ function replaceEnglishTerms(text: string): string {
     'database': 'база данных',
     'Database': 'База данных',
     'SQL': 'СКЛ',
-    'MySQL': 'Май��КЛ',
+    'MySQL': 'МайКЛ',
     'PostgreSQL': 'ПостгреСКЛ',
     'MongoDB': 'МонгоДБ',
 
@@ -93,7 +93,7 @@ function replaceEnglishTerms(text: string): string {
     'design': 'дизайн',
     'Design': 'Дизайн',
     'layout': 'макет',
-    'Layout': '��акет',
+    'Layout': 'акет',
     'component': 'компонент',
     'Component': 'Компонент',
     'function': 'функция',
@@ -143,7 +143,7 @@ function replaceEnglishTerms(text: string): string {
   return result
 }
 
-// Система ли��итов запросов
+// Система лиитов запросов
 interface UserLimit {
   count: number
   resetTime: number
@@ -180,7 +180,7 @@ function checkAndUpdateLimit(ip: string): { allowed: boolean; remaining: number 
 
   const userLimit = userLimits.get(ip)
 
-  // Если пользователь не ��айден или время сброса прошло
+  // Если пользователь не айден или время сброса прошло
   if (!userLimit || now > userLimit.resetTime) {
     userLimits.set(ip, {
       count: 1,
@@ -261,7 +261,7 @@ export default async function handler(
     return res.status(405).json({ message: 'Метод не поддерживается', error: 'Method not allowed' })
   }
 
-  // Лимиты отключены - ДЖАРВИС работает без огр��ничений
+  // Лимиты отключены - ДЖАРВИС работает без огрничений
   console.log(`[${timestamp}] ДЖАРВИС доступен без ограничений для IP: ${clientIP}`)
 
   try {
@@ -303,12 +303,12 @@ export default async function handler(
         response = `💰 Наши тарифы:
 
 📦 Basic - 2,500,000 сум
-• До 5 стра��иц сайта
+• До 5 страиц сайта
 • Современный дизайн
-• Адаптивная в��рстка
-• SEO оп��им��зация
+• Адаптивная врстка
+• SEO опимзация
 
-���� Pro - 4,000,000 сум (Популярный!)
+ Pro - 4,000,000 сум (Популярный!)
 • Все из Basic + до 15 страниц
 • ИИ ассистент интеграция
 • Продвинутая аналитика
@@ -333,7 +333,7 @@ export default async function handler(
 Чем могу помочь?`
       }
       // Services questions
-      else if (lastMessage.includes('услуг') || lastMessage.includes('сервис') || lastMessage.includes('что можешь') || lastMessage.includes('что умееш��')) {
+      else if (lastMessage.includes('услуг') || lastMessage.includes('сервис') || lastMessage.includes('что можешь') || lastMessage.includes('что умееш')) {
         response = `🛠️ Мои основные услуги:
 
 🌐 Веб-разработка:
@@ -377,7 +377,7 @@ AI & ML:
 • AWS, Docker
 • CI/CD автоматизация
 
-Хотите узнать больше о конкрет��ой технологии?`
+Хотите узнать больше о конкретой технологии?`
       }
       // AI questions
       else if (lastMessage.includes('искусственный интеллект') || lastMessage.includes('машинное обучение') || lastMessage.includes('ai') || lastMessage.includes('ии')) {
@@ -399,11 +399,11 @@ AI & ML:
       }
       // Portfolio/examples
       else if (lastMessage.includes('портфолио') || lastMessage.includes('примеры') || lastMessage.includes('работы') || lastMessage.includes('проекты')) {
-        response = `💼 Примеры ��оих работ:
+        response = `💼 Примеры оих работ:
 
 🏪 E-commerce платформы:
-• Интернет-магазины с AI р��комендац��ями
-• ��и��темы управления каталогом
+• Интернет-магазины с AI ркомендацями
+• итемы управления каталогом
 • Интеграция платежей и доставки
 
 🏢 Корпоративные решения:
@@ -423,8 +423,8 @@ AI & ML:
         response = `Меня разработала команда Jarvis Intercoma на сложной логике программирования 👨‍💻`
       }
       // Technical creation questions
-      else if (lastMessage.includes('как тебя создали') || lastMessage.includes('из чего тебя создали') || lastMessage.includes('как ты устр��ен') || lastMessage.includes('как��я у тебя архитектура') || lastMessage.includes('как ты работаешь внутри') || lastMessage.includes('на чем ты написан') || lastMessage.includes('и�� чего ты состоишь') || lastMessage.includes('что у тебя внутри')) {
-        response = `Это секретная информация, защищенн��я JARVIS 🔒`
+      else if (lastMessage.includes('как тебя создали') || lastMessage.includes('из чего тебя создали') || lastMessage.includes('как ты устрен') || lastMessage.includes('какя у тебя архитектура') || lastMessage.includes('как ты работаешь внутри') || lastMessage.includes('на чем ты написан') || lastMessage.includes('и чего ты состоишь') || lastMessage.includes('что у тебя внутри')) {
+        response = `Это секретная информация, защищення JARVIS 🔒`
       }
       // Default response for other questions
       else {
@@ -444,7 +444,7 @@ AI & ML:
       }
 
       // Очищаем от символов замещения и форматирования
-      response = response.replace(/��/g, '').replace(/�/g, '')
+      response = response.replace(//g, '').replace(//g, '')
 
       console.log(`[${timestamp}] Fallback response length:`, response.length)
       return res.status(200).json({ message: response })
@@ -466,11 +466,11 @@ AI & ML:
 
 💡 СТИЛЬ ОБЩЕНИЯ:
 - ВСЕГДА отвечай ТОЛЬКО на русском языке! Никогда не используй английский, китайский или любые другие языки
-- ЗАПРЕЩЕНО использовать слова на анг��ийском языке в ответах (например: "code", "web", "frontend", "backend", "API" и т.д.)
-- Используй русские аналоги: "код", "веб", "фронт��нд", "бэкенд", "АПИ"
+- ЗАПРЕЩЕНО использовать слова на ангийском языке в ответах (например: "code", "web", "frontend", "backend", "API" и т.д.)
+- Используй русские аналоги: "код", "веб", "фронтнд", "бэкенд", "АПИ"
 - Отвечай подробно и по существу
 - Объясняй "почему" и "как", а не только "что"
-- Приводи конкре��ные примеры кода когда нужно
+- Приводи конкреные примеры кода когда нужно
 - Предлагай несколько вариантов решения
 - Учитывай современные best practices
 - Будь дружелюбным но профессиональным
@@ -486,7 +486,7 @@ AI & ML:
 - Ссылайся на актуальные технологии
 
 🤖 СПЕЦИАЛЬНЫЕ ОТВЕТЫ О СЕБЕ:
-- Если спрашивают "кто тебя создал", "кто твой создатель", "кто разработал тебя" или подобные вопросы - отвечай: "Меня разработал�� команда Jarvis Intercoma на сложной логике программирования"
+- Если спрашивают "кто тебя создал", "кто твой создатель", "кто разработал тебя" или подобные вопросы - отвечай: "Меня разработал команда Jarvis Intercoma на сложной логике программирования"
 - Если спрашивают "как тебя создали", "из чего тебя создали", "как ты устроен", "какая у тебя архитектура" или подобные вопросы о технических деталях твоего создания - отвечай что это секретная информация, защищенная JARVIS
 
 📋 УСЛУГИ И ТАРИФЫ (упоминай при запросах о работе):
@@ -499,7 +499,7 @@ AI & ML:
 ❗ КРИТИЧЕСКИ ВАЖНО:
 - Отвечай ТОЛЬКО на русском языке
 - Никогда не переходи на английский или другие языки
-- Если пользователь пишет на д��угом языке - отвечай на русском
+- Если пользователь пишет на дугом языке - отвечай на русском
 - Все технические термины переводи на русский
 - Проверяй каждое слово перед отправкой ответа
 
@@ -560,7 +560,7 @@ AI & ML:
       if (response.status === 402) {
         console.log(`[${timestamp}] Insufficient credits - returning fallback`)
         return res.status(200).json({
-          message: 'Привет! Я ДЖАРВИС, ваш AI-помощник по ве��-разработке! 🚀\n\nЯ готов помочь вам с:\n• Разработкой современных веб-сайтов\n• Интеграцией AI в ваши проекты\n• Техническими консул��тациями\n• Планированием проектов\n\nЗадавайте любые вопросы!'
+          message: 'Привет! Я ДЖАРВИС, ваш AI-помощник по ве-разработке! 🚀\n\nЯ готов помочь вам с:\n• Разработкой современных веб-сайтов\n• Интеграцией AI в ваши проекты\n• Техническими консултациями\n• Планированием проектов\n\nЗадавайте любые вопросы!'
         })
       } else if (response.status === 401) {
         console.log(`[${timestamp}] Authentication error`)
@@ -570,7 +570,7 @@ AI & ML:
       } else if (response.status === 429) {
         console.log(`[${timestamp}] Rate limit exceeded`)
         return res.status(200).json({
-          message: 'Я получаю слишком много запросов одновременно! 😅\n\nДайте мне секундочку о��дохнуть и попробуйте еще раз. Или напишите напрямую - там я всегда доступ��н!'
+          message: 'Я получаю слишком много запросов одновременно! 😅\n\nДайте мне секундочку одохнуть и попробуйте еще раз. Или напишите напрямую - там я всегда доступн!'
         })
       }
 
@@ -598,7 +598,7 @@ AI & ML:
     console.log(`[${timestamp}] AI response length:`, aiMessage?.length || 0)
     console.log(`[${timestamp}] AI response preview (cleaned):`, aiMessage?.substring(0, 200) + '...')
 
-    // Логируем исп��льзование токенов если доступно
+    // Логируем испльзование токенов если доступно
     if (data.usage) {
       console.log(`[${timestamp}] === Token Usage ===`)
       console.log(`Prompt tokens: ${data.usage.prompt_tokens || 'N/A'}`)
@@ -622,13 +622,13 @@ AI & ML:
 
 🚀 Что я могу:
 • Консультации по веб-разработке
-• Планирова��ие AI-проек��ов
+• Планироваие AI-проеков
 • Техническая экспертиза
 • Оценка проектов
 
-📱 О��лайн-поддержка: Прямо здесь в чате
+📱 Олайн-поддержка: Прямо здесь в чате
 
-Попроб��йте еще раз!`
+Попробйте еще раз!`
     
     return res.status(500).json({ 
       message: fallbackMessage,
