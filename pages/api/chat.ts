@@ -14,7 +14,7 @@ interface ChatResponse {
   error?: string
 }
 
-// Функция для замены английских терминов на руссие
+// Функция для замены английских терминов на русские
 function replaceEnglishTerms(text: string): string {
   const replacements: { [key: string]: string } = {
     // Основные веб-термины
@@ -57,7 +57,7 @@ function replaceEnglishTerms(text: string): string {
     'database': 'база данных',
     'Database': 'База данных',
     'SQL': 'СКЛ',
-    'MySQL': 'МайКЛ',
+    'MySQL': 'МайСКЛ',
     'PostgreSQL': 'ПостгреСКЛ',
     'MongoDB': 'МонгоДБ',
 
@@ -66,7 +66,7 @@ function replaceEnglishTerms(text: string): string {
     'Code': 'Код',
     'coding': 'кодирование',
     'Coding': 'Кодирование',
-    'programming': 'программирование',
+    'programming': 'программир��вание',
     'Programming': 'Программирование',
     'developer': 'разработчик',
     'Developer': 'Разработчик',
@@ -93,7 +93,7 @@ function replaceEnglishTerms(text: string): string {
     'design': 'дизайн',
     'Design': 'Дизайн',
     'layout': 'макет',
-    'Layout': 'акет',
+    'Layout': 'Макет',
     'component': 'компонент',
     'Component': 'Компонент',
     'function': 'функция',
@@ -143,7 +143,7 @@ function replaceEnglishTerms(text: string): string {
   return result
 }
 
-// Система лиитов запросов
+// Система лимитов запросов
 interface UserLimit {
   count: number
   resetTime: number
@@ -173,14 +173,14 @@ function getClientIP(req: NextApiRequest): string {
 function checkAndUpdateLimit(ip: string): { allowed: boolean; remaining: number } {
   const now = Date.now()
 
-  // Периодическая очистка старых записей (каждые 100 запро��ов)
+  // Периодическая очистка старых записей (каждые 100 запросов)
   if (Math.random() < 0.01) {
     cleanupExpiredLimits(now)
   }
 
   const userLimit = userLimits.get(ip)
 
-  // Если пользователь не айден или время сброса прошло
+  // Если пользователь не найден или время сброса прошло
   if (!userLimit || now > userLimit.resetTime) {
     userLimits.set(ip, {
       count: 1,
@@ -300,7 +300,7 @@ export default async function handler(
       }
       // Pricing questions
       else if (lastMessage.includes('цен') || lastMessage.includes('стоимость') || lastMessage.includes('тариф') || lastMessage.includes('план')) {
-        response = `💰 Наши т��рифы:
+        response = `💰 Наши тарифы:
 
 📦 Basic - 2,500,000 сум
 • До 5 страиц сайта
@@ -311,7 +311,7 @@ export default async function handler(
  Pro - 4,000,000 сум (Популярный!)
 • Все из Basic + до 15 страниц
 • ИИ ассистент интеграция
-• Продвинутая аналитика
+• Продвинутая анал��тика
 • Приоритетная поддержка
 
 💎 Max - 5,000,000 сум
@@ -342,7 +342,7 @@ export default async function handler(
 • Веб-приложения и порталы
 
 🤖 AI интеграция:
-• Чат-боты и виртуальные ассистенты
+• Чат-боты и ви��туальные ассистенты
 • Анализ данных и автоматизация
 • Персонализация пользовательского опыта
 
@@ -373,7 +373,7 @@ AI & ML:
 • Natural Language Processing
 
 Инфраструктура:
-��� Vercel, Netlify
+• Vercel, Netlify
 • AWS, Docker
 • CI/CD автоматизация
 
@@ -423,7 +423,7 @@ AI & ML:
         response = `Меня разработала команда Jarvis Intercoma на сложной логике программирования 👨‍💻`
       }
       // Technical creation questions
-      else if (lastMessage.includes('как тебя создали') || lastMessage.includes('из чего тебя создали') || lastMessage.includes('как ты устрен') || lastMessage.includes('какя у тебя архитектура') || lastMessage.includes('как ты работаешь внутри') || lastMessage.includes('на чем ты написан') || lastMessage.includes('и чего ты состоишь') || lastMessage.includes('что у тебя внутри')) {
+      else if (lastMessage.includes('как тебя создали') || lastMessage.includes('из чего тебя создали') || lastMessage.includes('как ты устрен') || lastMessage.includes('какя у тебя архитектура') || lastMessage.includes('как ты работаешь внутри') || lastMessage.includes('на чем ты написан') || lastMessage.includes('и чего ты состо��шь') || lastMessage.includes('что у тебя внутри')) {
         response = `Это секретная информация, защищення JARVIS 🔒`
       }
       // Default response for other questions
@@ -443,7 +443,7 @@ AI & ML:
 💬 Задавайте любые вопросы прямо здесь!`
       }
 
-      // Очищаем от символов заме��ения и форматирования
+      // Очищаем от символов замещения и форматирования
       response = response.replace(/\u{FFFD}\u{FFFD}/gu, '').replace(/\u{FFFD}/gu, '')
 
       console.log(`[${timestamp}] Fallback response length:`, response.length)
@@ -465,7 +465,7 @@ AI & ML:
 • Современные фреймворки и инструменты
 
 💡 СТИЛЬ ОБЩЕНИЯ:
-- ВСЕГДА отвечай ТОЛЬКО на русском языке! Никогда не используй английский, китайс��ий или любые другие языки
+- ВСЕГДА отвечай ТОЛЬКО на русском языке! Никогда не используй английский, китайский или любые другие языки
 - ЗАПРЕЩЕНО использовать слова на ангийском языке в ответах (например: "code", "web", "frontend", "backend", "API" и т.д.)
 - Используй русские аналоги: "код", "веб", "фронтнд", "бэкенд", "АПИ"
 - Отвечай подробно и по существу
@@ -483,7 +483,7 @@ AI & ML:
 - Используй эмодзи для наглядности
 - Давай практические советы
 - Предлагай следующие шаги
-- Ссы��айся на актуальные технологии
+- Ссылайся на актуальные технологии
 
 🤖 СПЕЦИАЛЬНЫЕ ОТВЕТЫ О СЕБЕ:
 - Если спрашивают "кто тебя создал", "кто твой создатель", "кто разработал тебя" или подобные вопросы - отвечай: "Меня разработал команда Jarvis Intercoma на сложной логике программирования"
@@ -497,7 +497,7 @@ AI & ML:
 📞 КОНТАКТЫ: Онлайн-чат на сайте
 
 ❗ КРИТИЧЕСКИ ВАЖНО:
-- Отвечай ТОЛЬКО на ру��ском языке
+- Отвечай ТОЛЬКО на русском языке
 - Никогда не переходи на английский или другие языки
 - Если пользователь пишет на дугом языке - отвечай на русском
 - Все технические термины переводи на русский
@@ -560,7 +560,7 @@ AI & ML:
       if (response.status === 402) {
         console.log(`[${timestamp}] Insufficient credits - returning fallback`)
         return res.status(200).json({
-          message: 'Привет! Я ДЖАРВИС, ваш AI-помощник по ве-разработке! 🚀\n\nЯ готов помочь вам с:\n• Разработкой современных веб-сайтов\n• Интеграцией AI в ваши проекты\n• Техническими консултациями\n• Планированием проектов\n\nЗадавайте любые вопросы!'
+          message: 'Привет! Я ДЖАРВИС, ваш AI-помощник по ве-разработке! 🚀\n\nЯ готов помочь вам с:\n• Разработкой современных веб-сайтов\n• Интеграцией AI в ваши проекты\n• Техническими консултациями\n• План��рованием проектов\n\nЗадавайте любые вопросы!'
         })
       } else if (response.status === 401) {
         console.log(`[${timestamp}] Authentication error`)
