@@ -61,6 +61,7 @@ export default function JarvisChat({ isOpen, onClose }: JarvisChatProps) {
       }
     } catch (error) {
       console.error('Error saving interaction for learning:', error)
+      // Не блокируем пользовательский интерфейс при ошибках сохранения
     }
   }
 
