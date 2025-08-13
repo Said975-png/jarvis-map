@@ -74,9 +74,22 @@ async function handleGet(req: NextApiRequest, res: NextApiResponse<LearningApiRe
 
 async function saveInteractionHandler(req: NextApiRequest, res: NextApiResponse<LearningApiResponse>) {
   try {
+    console.log('=== SAVE INTERACTION DEBUG ===')
+    console.log('Request body:', JSON.stringify(req.body, null, 2))
+
     const { userMessage, botResponse, sessionId, context = [], tags = [] } = req.body
 
+    console.log('Extracted fields:')
+    console.log('- userMessage:', userMessage)
+    console.log('- botResponse:', botResponse)
+    console.log('- sessionId:', sessionId)
+
     if (!userMessage || !botResponse || !sessionId) {
+      console.log('VALIDATION FAILED: Missing required fields')
+      console.log('- userMessage exists:', !!userMessage)
+      console.log('- botResponse exists:', !!botResponse)
+      console.log('- sessionId exists:', !!sessionId)
+
       return res.status(400).json({
         success: false,
         error: 'Missing required fields: userMessage, botResponse, sessionId'
