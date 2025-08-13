@@ -159,7 +159,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       return data.message
     } catch (error) {
       console.error('Error calling AI API:', error)
-      return 'Я готов помочь! Попробуйте ещё раз, зада�� ваш вопрос. Если проблема повторится - задавайте вопросы прямо здесь в чате! 🚀'
+      return 'Я готов помочь! Попробуйте ещё раз, задав ваш вопрос. Если проблема повторится - задавайте вопросы прямо здесь в чате! 🚀'
     }
   }
 
@@ -284,7 +284,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       
       const errorResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: 'Извините, произошла ошибка. П��пробуйте еще раз.',
+        text: 'Извините, произошла ошибка. Попробуйте еще раз.',
         isUser: false,
         timestamp: new Date()
       }

@@ -50,7 +50,7 @@ function replaceEnglishTerms(text: string): string {
     'React': 'Реакт',
     'Vue': 'Вью',
     'Angular': 'Ангуляр',
-    'Next.js': 'Некст.джс',
+    'Next.js': 'Некст.��жс',
     'Nuxt': 'Накст',
 
     // Базы данных
@@ -88,7 +88,7 @@ function replaceEnglishTerms(text: string): string {
     'Desktop': 'Десктоп',
     'user': 'пользователь',
     'User': 'Пользователь',
-    'interface': 'интерфейс',
+    'interface': '��нтерфейс',
     'Interface': 'Интерфейс',
     'design': 'дизайн',
     'Design': 'Дизайн',
@@ -308,7 +308,7 @@ export default async function handler(
 • Адаптивная верстка
 • SEO оптимизация
 
-🚀 Pro - 4,000,000 су�� (Популярный!)
+🚀 Pro - 4,000,000 сум (Популярный!)
 • Все из Basic + до 15 страниц
 • ИИ ассистент интеграция
 • Продвинутая аналитика
@@ -401,7 +401,7 @@ AI & ML:
       else if (lastMessage.includes('портфолио') || lastMessage.includes('примеры') || lastMessage.includes('работы') || lastMessage.includes('проекты')) {
         response = `💼 Примеры моих работ:
 
-🏪 E-commerce платформы:
+🏪 E-commerce плат��ормы:
 • Интернет-магазины с AI рекомендациями
 • Системы управления каталогом
 • Интеграция платежей и доставки
