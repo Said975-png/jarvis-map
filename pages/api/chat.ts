@@ -90,7 +90,7 @@ function replaceEnglishTerms(text: string): string {
     'User': 'Пользователь',
     'interface': 'интерфейс',
     'Interface': 'Интерфейс',
-    'design': 'ди��айн',
+    'design': 'дизайн',
     'Design': 'Дизайн',
     'layout': 'макет',
     'Layout': 'Макет',
@@ -173,7 +173,7 @@ function getClientIP(req: NextApiRequest): string {
 function checkAndUpdateLimit(ip: string): { allowed: boolean; remaining: number } {
   const now = Date.now()
 
-  // Периодическая очистка старых запис��й (каждые 100 запросов)
+  // Периодическая очистка старых записей (каждые 100 запросов)
   if (Math.random() < 0.01) {
     cleanupExpiredLimits(now)
   }
@@ -402,7 +402,7 @@ AI & ML:
         response = `💼 Примеры моих работ:
 
 🏪 E-commerce платформы:
-• Интернет-магазины с AI рекоменда��иями
+• Интернет-магазины с AI рекомендациями
 • Системы управления каталогом
 • онтеграция платежей и доставки
 
@@ -472,7 +472,7 @@ AI & ML:
 • UI/UX дизайн и архитектура
 • DevOps и облачные технологии
 • Базы данных и оптимизация
-• Бизнес-анализ и консульти��ование
+• Бизнес-анализ и консультирование
 • Современные фреймворки и инструменты
 
 💡 СТИЛЬ ОБЩЕНИЯ:
