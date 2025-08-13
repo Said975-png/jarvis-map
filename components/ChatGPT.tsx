@@ -166,6 +166,12 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
         throw new Error(data.error)
       }
 
+      // Проверяем что ответ не пустой
+      if (!data.message || data.message.trim().length === 0) {
+        console.warn('Empty response from API, using fallback')
+        return 'Извините, я получил пустой ответ. Попробуйте переформулировать вопрос! 🤔'
+      }
+
       return data.message
     } catch (error) {
       console.error('Error calling AI API:', error)
