@@ -50,7 +50,7 @@ function replaceEnglishTerms(text: string): string {
     'React': 'Реакт',
     'Vue': 'Вью',
     'Angular': 'Ангуляр',
-    'Next.js': 'Некст.��жс',
+    'Next.js': 'Некст.джс',
     'Nuxt': 'Накст',
 
     // Базы данных
@@ -88,7 +88,7 @@ function replaceEnglishTerms(text: string): string {
     'Desktop': 'Десктоп',
     'user': 'пользователь',
     'User': 'Пользователь',
-    'interface': '��нтерфейс',
+    'interface': 'интерфейс',
     'Interface': 'Интерфейс',
     'design': 'дизайн',
     'Design': 'Дизайн',
@@ -173,7 +173,7 @@ function getClientIP(req: NextApiRequest): string {
 function checkAndUpdateLimit(ip: string): { allowed: boolean; remaining: number } {
   const now = Date.now()
 
-  // Периодическая очистка старых записей (каждые 100 запросов)
+  // Периодическая очистка ст��рых записей (каждые 100 запросов)
   if (Math.random() < 0.01) {
     cleanupExpiredLimits(now)
   }
@@ -398,10 +398,10 @@ AI & ML:
 Какой AI функционал вас интересует?`
       }
       // Portfolio/examples
-      else if (lastMessage.includes('портфолио') || lastMessage.includes('примеры') || lastMessage.includes('работы') || lastMessage.includes('проекты')) {
+      else if (lastMessage.includes('портфолио') || lastMessage.includes('примеры') || lastMessage.includes('ра��оты') || lastMessage.includes('проекты')) {
         response = `💼 Примеры моих работ:
 
-🏪 E-commerce плат��ормы:
+🏪 E-commerce платформы:
 • Интернет-магазины с AI рекомендациями
 • Системы управления каталогом
 • Интеграция платежей и доставки
@@ -450,7 +450,7 @@ AI & ML:
     // Добавляем системное сообщение для ДЖАРВИС
     const systemMessage: ChatMessage = {
       role: 'system',
-      content: `Ты ДЖАРВИС - продвинутый AI-помощник и эксперт по веб-разработке. Ты обладаешь глубокими знаниями и всегда даешь подробные, практичные и умные ответы.
+      content: `Ты ДЖАРВИС - продвинутый AI-помощник и эксперт п�� веб-разработке. Ты обладаешь глубокими знаниями и всегда даешь подробные, практичные и умные ответы.
 
 🎯 ТВОЯ ЭКСПЕРТИЗА:
 • Веб-разработка (Frontend/Backend)
@@ -471,7 +471,7 @@ AI & ML:
 - Предлагай несколько вариантов решения
 - Учитывай современные best practices
 - Будь дружелюбным но профессиональным
-- НЕ ИС��ОЛЬЗУЙ MARKDOWN: никаких *, **, #, ###, \`, \`\`\`
+- НЕ ИСПОЛЬЗУЙ MARKDOWN: никаких *, **, #, ###, \`, \`\`\`
 - Пиши обычным текстом без форматирования
 - Используй только эмодзи и обычные символы для структуры
 
