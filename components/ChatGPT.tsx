@@ -31,6 +31,11 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
   // Функция для сохранения взаимодействия в базе знаний
   const saveInteractionToLearning = async (userMessage: string, botResponse: string, userMessageId: string) => {
     try {
+      console.log('=== SAVING INTERACTION TO LEARNING ===')
+      console.log('userMessage:', userMessage)
+      console.log('botResponse:', botResponse)
+      console.log('sessionId:', sessionId.current)
+
       const response = await fetch('/api/learning', {
         method: 'POST',
         headers: {
@@ -240,7 +245,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
     if (files && files.length > 0) {
       handleFileUpload(files[0])
     }
-    // Очищаем input для возможности повторной загрузки того же файла
+    // Очищаем input для возможности повторной загрузки того же ф��йла
     if (fileInputRef.current) {
       fileInputRef.current.value = ''
     }
