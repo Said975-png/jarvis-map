@@ -153,7 +153,7 @@ export default async function handler(
     }
 
     // Ограничиваем размер текста для API
-    const maxTextLength = 15000 // Примерно 3000 токено��
+    const maxTextLength = 15000 // Примерно 3000 токенов
     const truncatedText = pdfText.length > maxTextLength 
       ? pdfText.substring(0, maxTextLength) + '\n\n[Текст обрезан из-за ограничений размера...]'
       : pdfText
