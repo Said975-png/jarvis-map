@@ -70,7 +70,7 @@ export default function JarvisChat({ isOpen, onClose }: JarvisChatProps) {
     const commonTags = [
       'веб-разработка', 'дизайн', 'программирование', 'ai', 'технологии',
       'фронтенд', 'бэкенд', 'react', 'javascript', 'typescript', 'css',
-      'html', 'api', 'база данных', 'сеть', 'безопасность'
+      'html', 'api', 'база данных', 'сеть', 'безопа��ность'
     ]
 
     const lowerText = text.toLowerCase()
@@ -127,6 +127,12 @@ export default function JarvisChat({ isOpen, onClose }: JarvisChatProps) {
 
       if (data.error) {
         throw new Error(data.error)
+      }
+
+      // Проверяем что ответ не пустой
+      if (!data.message || data.message.trim().length === 0) {
+        console.warn('Empty response from API, using fallback')
+        return 'Извините, я получил пустой ответ. Попробуйте переформулировать вопрос! 🤔'
       }
 
       return data.message
