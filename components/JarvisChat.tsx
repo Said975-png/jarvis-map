@@ -47,13 +47,17 @@ export default function JarvisChat({ isOpen, onClose }: JarvisChatProps) {
         }),
       })
 
-      const data = await response.json()
-      if (data.success) {
-        setInteractionIds(prev => ({
-          ...prev,
-          [aiMessageId]: data.data.interactionId
-        }))
-        console.log('Interaction saved for learning:', data.data.interactionId)
+      if (response.ok) {
+        const data = await response.json()
+        if (data.success) {
+          setInteractionIds(prev => ({
+            ...prev,
+            [aiMessageId]: data.data.interactionId
+          }))
+          console.log('Interaction saved for learning:', data.data.interactionId)
+        }
+      } else {
+        console.error('Failed to save interaction, status:', response.status)
       }
     } catch (error) {
       console.error('Error saving interaction for learning:', error)
