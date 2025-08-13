@@ -84,15 +84,18 @@ async function saveInteractionHandler(req: NextApiRequest, res: NextApiResponse<
     console.log('- botResponse:', botResponse)
     console.log('- sessionId:', sessionId)
 
-    if (!userMessage || !botResponse || !sessionId) {
-      console.log('VALIDATION FAILED: Missing required fields')
-      console.log('- userMessage exists:', !!userMessage)
-      console.log('- botResponse exists:', !!botResponse)
-      console.log('- sessionId exists:', !!sessionId)
+    // Более детальная валидация
+    const isValidString = (str: any) => typeof str === 'string' && str.trim().length > 0
+
+    if (!isValidString(userMessage) || !isValidString(botResponse) || !isValidString(sessionId)) {
+      console.log('VALIDATION FAILED: Missing or invalid required fields')
+      console.log('- userMessage valid:', isValidString(userMessage), typeof userMessage, userMessage)
+      console.log('- botResponse valid:', isValidString(botResponse), typeof botResponse, botResponse)
+      console.log('- sessionId valid:', isValidString(sessionId), typeof sessionId, sessionId)
 
       return res.status(400).json({
         success: false,
-        error: 'Missing required fields: userMessage, botResponse, sessionId'
+        error: `Missing or invalid required fields. userMessage: ${isValidString(userMessage)}, botResponse: ${isValidString(botResponse)}, sessionId: ${isValidString(sessionId)}`
       })
     }
 
