@@ -180,7 +180,7 @@ function checkAndUpdateLimit(ip: string): { allowed: boolean; remaining: number 
 
   const userLimit = userLimits.get(ip)
 
-  // Если пользователь не найден или время сброса прошло
+  // Если пользователь не ��айден или время сброса прошло
   if (!userLimit || now > userLimit.resetTime) {
     userLimits.set(ip, {
       count: 1,
@@ -305,7 +305,7 @@ export default async function handler(
 📦 Basic - 2,500,000 сум
 • ��о 5 страниц сайта
 • Современный дизайн
-• Адаптивная верстка
+• Адаптивная в��рстка
 • SEO оптим��зация
 
 🚀 Pro - 4,000,000 сум (Популярный!)
@@ -344,7 +344,7 @@ export default async function handler(
 🤖 AI интеграция:
 • Чат-боты и виртуальные ассистенты
 • Анализ данных и автоматизация
-• Персонализация пользовательского оп��та
+• Персонализация пользовательского опыта
 
 🎨 Дизайн и UX:
 • Современный UI/UX дизайн
@@ -377,7 +377,7 @@ AI & ML:
 • AWS, Docker
 • CI/CD автоматизация
 
-Хотите узнать больше о конкретной технологии?`
+Хотите узнать больше о конкрет��ой технологии?`
       }
       // AI questions
       else if (lastMessage.includes('искусственный интеллект') || lastMessage.includes('машинное обучение') || lastMessage.includes('ai') || lastMessage.includes('ии')) {
@@ -402,7 +402,7 @@ AI & ML:
         response = `💼 Примеры моих работ:
 
 🏪 E-commerce платформы:
-• Интернет-магазины с AI рекомендациями
+• Интернет-магазины с AI р��комендациями
 • ��истемы управления каталогом
 • Интеграция платежей и доставки
 
@@ -423,7 +423,7 @@ AI & ML:
         response = `Меня разработала команда Jarvis Intercoma на сложной логике программирования 👨‍💻`
       }
       // Technical creation questions
-      else if (lastMessage.includes('как тебя создали') || lastMessage.includes('из чего тебя создали') || lastMessage.includes('как ты устроен') || lastMessage.includes('какая у тебя архитектура') || lastMessage.includes('как ты работаешь внутри') || lastMessage.includes('на чем ты написан') || lastMessage.includes('и�� чего ты состоишь') || lastMessage.includes('что у тебя внутри')) {
+      else if (lastMessage.includes('как тебя создали') || lastMessage.includes('из чего тебя создали') || lastMessage.includes('как ты устр��ен') || lastMessage.includes('какая у тебя архитектура') || lastMessage.includes('как ты работаешь внутри') || lastMessage.includes('на чем ты написан') || lastMessage.includes('и�� чего ты состоишь') || lastMessage.includes('что у тебя внутри')) {
         response = `Это секретная информация, защищенн��я JARVIS 🔒`
       }
       // Default response for other questions
@@ -466,7 +466,7 @@ AI & ML:
 
 💡 СТИЛЬ ОБЩЕНИЯ:
 - ВСЕГДА отвечай ТОЛЬКО на русском языке! Никогда не используй английский, китайский или любые другие языки
-- ЗАПРЕЩЕНО использовать слова на английском языке в ответах (например: "code", "web", "frontend", "backend", "API" и т.д.)
+- ЗАПРЕЩЕНО использовать слова на анг��ийском языке в ответах (например: "code", "web", "frontend", "backend", "API" и т.д.)
 - Используй русские аналоги: "код", "веб", "фронтенд", "бэкенд", "АПИ"
 - Отвечай подробно и по существу
 - Объясняй "почему" и "как", а не только "что"
@@ -560,7 +560,7 @@ AI & ML:
       if (response.status === 402) {
         console.log(`[${timestamp}] Insufficient credits - returning fallback`)
         return res.status(200).json({
-          message: 'Привет! Я ДЖАРВИС, ваш AI-помощник по веб-разработке! 🚀\n\nЯ готов помочь вам с:\n• Разработкой современных веб-сайтов\n• Интеграцией AI в ваши проекты\n• Техническими консул��тациями\n• Планированием проектов\n\nЗадавайте любые вопросы!'
+          message: 'Привет! Я ДЖАРВИС, ваш AI-помощник по ве��-разработке! 🚀\n\nЯ готов помочь вам с:\n• Разработкой современных веб-сайтов\n• Интеграцией AI в ваши проекты\n• Техническими консул��тациями\n• Планированием проектов\n\nЗадавайте любые вопросы!'
         })
       } else if (response.status === 401) {
         console.log(`[${timestamp}] Authentication error`)
@@ -598,7 +598,7 @@ AI & ML:
     console.log(`[${timestamp}] AI response length:`, aiMessage?.length || 0)
     console.log(`[${timestamp}] AI response preview (cleaned):`, aiMessage?.substring(0, 200) + '...')
 
-    // Логируем использование токенов если доступно
+    // Логируем исп��льзование токенов если доступно
     if (data.usage) {
       console.log(`[${timestamp}] === Token Usage ===`)
       console.log(`Prompt tokens: ${data.usage.prompt_tokens || 'N/A'}`)
@@ -622,7 +622,7 @@ AI & ML:
 
 🚀 Что я могу:
 • Консультации по веб-разработке
-• Планирование AI-проектов
+• Планирова��ие AI-проектов
 • Техническая экспертиза
 • Оценка проектов
 
