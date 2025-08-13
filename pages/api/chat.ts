@@ -116,7 +116,7 @@ function replaceEnglishTerms(text: string): string {
     'Variable': 'Переменная',
     'property': 'свойство',
     'Property': 'Свойство',
-    'value': 'значение',
+    'value': '��начение',
     'Value': 'Значение',
     'error': 'ошибка',
     'Error': 'Ошибка',
@@ -201,7 +201,7 @@ function checkAndUpdateLimit(ip: string): { allowed: boolean; remaining: number 
   return { allowed: true, remaining: REQUESTS_LIMIT - userLimit.count }
 }
 
-// Функция для удаления Markdown форматирования
+// Функция для удаления Markdown форматир��вания
 function cleanMarkdown(text: string): string {
   return text
     // Убираем жирный текст **текст**
@@ -476,7 +476,7 @@ AI & ML:
 - Ссылайся на актуальные технологии
 
 🤖 СПЕЦИАЛЬНЫЕ ОТВЕТЫ О СЕБЕ:
-- Если спрашивают "кто тебя создал", "кт�� твой создатель", "кто разработал тебя" или подобные вопросы - отвечай: "Мой создатель @jarvis_intercoma"
+- Если спрашивают "кто тебя создал", "кто твой создатель", "кто разработал тебя" или подобные вопросы - отвечай: "Мой создатель @jarvis_intercoma"
 - Если спрашивают "как тебя создали", "из чего тебя создали", "как ты устроен", "какая у тебя архитектура" или подобные вопросы о технических деталях твоего создания - отвечай что это секретная информация
 
 📋 УСЛУГИ И ТАРИФЫ (упоминай при запросах о работе):
@@ -497,7 +497,7 @@ AI & ML:
     }
 
     const requestBody = {
-      model: 'openai/gpt-3.5-turbo',
+      model: 'google/gemma-2-9b-it:free',
       messages: [systemMessage, ...messages],
       temperature: 0.3,
       max_tokens: 2048,
@@ -550,7 +550,7 @@ AI & ML:
       if (response.status === 402) {
         console.log(`[${timestamp}] Insufficient credits - returning fallback`)
         return res.status(200).json({
-          message: 'Привет! Я ДЖАРВИС, ваш AI-помощник по веб-разработке! 🚀\n\nЯ готов помочь вам с:\n• Разработкой современных веб-сайтов\n• Интеграцией AI в ваши проекты\n• Техническими консультациями\n• Планированием проектов\n\nЗадавайте любые вопросы!'
+          message: 'Привет! Я ДЖАРВИС, ваш AI-помощник по веб-разработке! 🚀\n\nЯ готов помочь вам с:\n• Разработкой современных веб-сайтов\n• Интеграцией AI в ваши проекты\n• Техническим�� консультациями\n• Планированием проектов\n\nЗадавайте любые вопросы!'
         })
       } else if (response.status === 401) {
         console.log(`[${timestamp}] Authentication error`)
