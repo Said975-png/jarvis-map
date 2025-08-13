@@ -13,7 +13,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: 'Привет! Я ДЖАРВИС, ваш AI-по��ощник. Чем могу помочь?',
+      text: 'Привет! Я ДЖАРВИС, ваш AI-помощник. Чем могу помочь?',
       isUser: false,
       timestamp: new Date()
     }
@@ -159,7 +159,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       return data.message
     } catch (error) {
       console.error('Error calling AI API:', error)
-      return 'Я го��ов помочь! Попробуйте ещё раз, задав ваш вопрос. Если проблема повторится - задавайте вопросы прямо здесь в чате! 🚀'
+      return 'Я готов помочь! Попробуйте ещё раз, зада�� ваш вопрос. Если проблема повторится - задавайте вопросы прямо здесь в чате! 🚀'
     }
   }
 
