@@ -164,5 +164,33 @@
       "ux"
     ],
     "isUseful": null
+  },
+  {
+    "id": "interaction_1755068682107_8pyfoirzk",
+    "timestamp": "2025-08-13T07:04:42.107Z",
+    "userMessage": "привет",
+    "botResponse": "Привет! 👋  Чем могу помочь? 😊",
+    "userFeedback": null,
+    "context": [
+      "Привет! Я ДЖАРВИС, ваш AI-по��ощник. Чем могу помочь?"
+    ],
+    "sessionId": "session_1755068426927_mvaom39dd",
+    "tags": [],
+    "isUseful": null
+  },
+  {
+    "id": "interaction_1755068686460_nfjztjkos",
+    "timestamp": "2025-08-13T07:04:46.461Z",
+    "userMessage": "как дела",
+    "botResponse": "У меня всё отлично, спасибо! 😊 А у тебя как дела?\n😊",
+    "userFeedback": null,
+    "context": [
+      "Привет! Я ДЖАРВИС, ваш AI-по��ощник. Чем могу помочь?",
+      "привет",
+      "Привет! 👋  Чем могу помочь? 😊"
+    ],
+    "sessionId": "session_1755068426927_mvaom39dd",
+    "tags": [],
+    "isUseful": null
   }
 ]
