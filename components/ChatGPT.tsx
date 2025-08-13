@@ -65,7 +65,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
     }
   }
 
-  // Извле��ение тегов из текста
+  // Извлечение тегов из текста
   const extractTags = (text: string): string[] => {
     const commonTags = [
       'веб-разработка', 'дизайн', 'программирование', 'ai', 'технологии',
