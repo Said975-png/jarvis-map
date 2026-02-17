@@ -13,7 +13,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: 'Привет! Я ДЖАРВИС, ваш AI-помощник. Чем могу помочь?',
+      text: 'Привет! Я ДЖАРВИС, ваш AI-помощник. Чем могу помочь?\n\nНовая функция: Загрузите фото челове��а и одежды, скажите "одень эту вещь на меня" для виртуальной примерки!',
       isUser: false,
       timestamp: new Date()
     }
@@ -22,13 +22,16 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
   const [isTyping, setIsTyping] = useState(false)
   const [isUploadingFile, setIsUploadingFile] = useState(false)
   const [interactionIds, setInteractionIds] = useState<{[messageId: string]: string}>({})
+  const [uploadedImages, setUploadedImages] = useState<{[messageId: string]: string}>({})
+  const [previewImages, setPreviewImages] = useState<string[]>([])
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const imageInputRef = useRef<HTMLInputElement>(null)
   
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const sessionId = useRef(`session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`)
 
-  // Функция для сохранения взаимодействия в базе знаний
+  // Функция ��ля сохра��ения ��заимодействия в базе знаний
   const saveInteractionToLearning = async (userMessage: string, botResponse: string, userMessageId: string) => {
     try {
       const response = await fetch('/api/learning', {
@@ -60,7 +63,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
     }
   }
 
-  // Извлечение тегов из текста
+  // Извл��чение тегов из текста
   const extractTags = (text: string): string[] => {
     const commonTags = [
       'веб-разработка', 'дизайн', 'программирование', 'ai', 'технологии',
@@ -122,10 +125,36 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
     }
   }, [isOpen])
 
-  const generateJarvisResponse = async (userMessage: string, conversationHistory: Message[]): Promise<string> => {
+  const generateJarvisResponse = async (userMessage: string, conversationHistory: Message[], messageId?: string): Promise<string> => {
     try {
+      // Проверяем, если это запрос на примерку одежды
+      const isTryOnRequest = userMessage.toLowerCase().includes('одень') ||
+                            userMessage.toLowerCase().includes('примерь') ||
+                            userMessage.toLowerCase().includes('надень')
+
+      if (isTryOnRequest && messageId && uploadedImages[messageId]) {
+        // Отправляем запрос на виртуальную примерку
+        const response = await fetch('/api/virtual-tryon', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            images: uploadedImages[messageId].split(','),
+            prompt: userMessage
+          }),
+        })
+
+        const data = await response.json()
+        if (data.success) {
+          return `Виртуальная примерка готова!\n\n![Результат примерки](${data.resultImage})\n\nКак вам результат? Могу обработать другие варианты одежды!`
+        } else {
+          return 'Извините, произошла ошибка при обработке примерки. Попробуйте:\n- Загрузить изображения заново\n- Использовать более четкие фотографии\n- Убедиться, что одно фото - человек, другое - одежда'
+        }
+      }
+
       const apiMessages = conversationHistory
-        .filter(msg => msg.text !== 'При��ет! Я ДЖАРВИС, ваш AI-помощник. Чем могу помочь?')
+        .filter(msg => msg.text !== 'При���ет! Я ДЖАРВИС, ваш AI-помощник. Чем могу п����очь?')
         .map(msg => ({
           role: msg.isUser ? 'user' as const : 'assistant' as const,
           content: msg.text
@@ -159,7 +188,57 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       return data.message
     } catch (error) {
       console.error('Error calling AI API:', error)
-      return 'Я готов помочь! Попробуйте ещё раз, задав ваш вопрос. Если проблема повторится - задавайте вопросы прямо здесь в чате! 🚀'
+      return 'Я готов помочь! Попробуйте ещё раз, задав ваш во��рос. ��сли проблема повторится - задавайте вопросы прямо зд��сь в чате! 🚀'
+    }
+  }
+
+  const handleImageUpload = async (files: FileList) => {
+    if (!files || files.length === 0) return
+
+    const imageFiles = Array.from(files).filter(file => file.type.startsWith('image/'))
+    if (imageFiles.length === 0) {
+      const errorMessage: Message = {
+        id: Date.now().toString(),
+        text: 'Пожалуйста, выберите изображения',
+        isUser: false,
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, errorMessage])
+      return
+    }
+
+    setIsUploadingFile(true)
+
+    try {
+      const uploadPromises = imageFiles.map(async (file) => {
+        const formData = new FormData()
+        formData.append('image', file)
+
+        const response = await fetch('/api/upload-image', {
+          method: 'POST',
+          body: formData
+        })
+
+        const data = await response.json()
+        return { file: file.name, url: data.url }
+      })
+
+      const uploadResults = await Promise.all(uploadPromises)
+
+      // Добавляем изображения в превью (не отправляем сразу в чат)
+      setPreviewImages(uploadResults.map(r => r.url))
+
+    } catch (error) {
+      console.error('Image upload error:', error)
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: `Ошибка при загрузке изображений: ${error instanceof Error ? error.message : 'Неизвестная ошибка'}`,
+        isUser: false,
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, errorMessage])
+    } finally {
+      setIsUploadingFile(false)
     }
   }
 
@@ -178,7 +257,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
     if (file.size > 10 * 1024 * 1024) {
       const errorMessage: Message = {
         id: Date.now().toString(),
-        text: 'Размер файла не должен превышать 10MB',
+        text: 'Размер файла не должен превы��ать 10MB',
         isUser: false,
         timestamp: new Date()
       }
@@ -210,7 +289,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
 
       const analysisMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: data.message || 'Файл проанализирован',
+        text: data.message || 'Файл проан��лизирован',
         isUser: false,
         timestamp: new Date()
       }
@@ -220,7 +299,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       console.error('File upload error:', error)
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: `Ошибка при загрузке файла: ${error instanceof Error ? error.message : 'Неизвестная ошибка'}`,
+        text: `Ошибка при загрузке ��айла: ${error instanceof Error ? error.message : 'Неизвестная ошибка'}`,
         isUser: false,
         timestamp: new Date()
       }
@@ -241,31 +320,73 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
     }
   }
 
+  const handleImageInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+    if (files && files.length > 0) {
+      handleImageUpload(files)
+    }
+    // Очищаем input для возможности повторной загрузки
+    if (imageInputRef.current) {
+      imageInputRef.current.value = ''
+    }
+  }
+
   const openFileDialog = () => {
     if (!isTyping && !isUploadingFile && fileInputRef.current) {
       fileInputRef.current.click()
     }
   }
 
+  const openImageDialog = () => {
+    if (!isTyping && !isUploadingFile && imageInputRef.current) {
+      imageInputRef.current.click()
+    }
+  }
+
+  const removePreviewImage = (index: number) => {
+    setPreviewImages(prev => prev.filter((_, i) => i !== index))
+  }
+
+  const clearAllPreviews = () => {
+    setPreviewImages([])
+  }
+
 
   const handleSendMessage = async () => {
-    if (!inputText.trim()) return
+    if (!inputText.trim() && previewImages.length === 0) return
+
+    let messageText = inputText
+
+    // Если есть превью изображения, добавляем их в сообщение
+    if (previewImages.length > 0) {
+      const imageInfo = `Изображения (${previewImages.length}): ${previewImages.map((_, i) => `Фото ${i + 1}`).join(', ')}\n\n`
+      messageText = imageInfo + (inputText || 'Обраб��тайте эти изображения')
+    }
 
     const userMessage: Message = {
       id: Date.now().toString(),
-      text: inputText,
+      text: messageText,
       isUser: true,
       timestamp: new Date()
     }
 
-    const currentInput = inputText
+    // Сохраняем изображения для этого со��бщения
+    if (previewImages.length > 0) {
+      setUploadedImages(prev => ({
+        ...prev,
+        [userMessage.id]: previewImages.join(',')
+      }))
+    }
+
+    const currentInput = inputText || 'Обработайте эти изображения'
     const updatedMessages = [...messages, userMessage]
     setMessages(updatedMessages)
     setInputText('')
+    setPreviewImages([]) // Очищаем превью после отправки
     setIsTyping(true)
 
     try {
-      const aiText = await generateJarvisResponse(currentInput, updatedMessages)
+      const aiText = await generateJarvisResponse(currentInput, updatedMessages, userMessage.id)
 
       const aiResponse: Message = {
         id: (Date.now() + 1).toString(),
@@ -277,14 +398,14 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
       const finalMessages = [...updatedMessages, aiResponse]
       setMessages(finalMessages)
 
-      // Сохраняем взаимодействие для обучения
+      // Сохраняем взаимодействие дл�� обучения
       await saveInteractionToLearning(currentInput, aiText, aiResponse.id)
     } catch (error) {
       console.error('Error generating AI response:', error)
       
       const errorResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: 'Извините, произошла ошибка. Попр��буйте еще раз.',
+        text: 'Извините, произошла ошибка. Попр���буйте еще раз.',
         isUser: false,
         timestamp: new Date()
       }
@@ -320,7 +441,7 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
             <div>
               <h3>ДЖАРВИС</h3>
               <div className="status-indicator">
-                В сети
+                В сет��
               </div>
             </div>
           </div>
@@ -348,12 +469,23 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
               )}
               <div className="message-content">
                 <div className="message-bubble">
-                  {message.text.split('\n').map((line, index) => (
-                    <div key={index}>
-                      {line}
-                      {index < message.text.split('\n').length - 1 && <br />}
-                    </div>
-                  ))}
+                  {message.text.split('\n').map((line, index) => {
+                    // Проверяем, если строка содержит markdown изображ��н��е
+                    const imageMatch = line.match(/!\[([^\]]*)\]\(([^)]+)\)/)
+                    if (imageMatch) {
+                      return (
+                        <div key={index} className="message-image">
+                          <img src={imageMatch[2]} alt={imageMatch[1]} className="chat-result-image" />
+                        </div>
+                      )
+                    }
+                    return (
+                      <div key={index}>
+                        {line}
+                        {index < message.text.split('\n').length - 1 && <br />}
+                      </div>
+                    )
+                  })}
                 </div>
                 {!message.isUser && interactionIds[message.id] && (
                   <MessageFeedback
@@ -389,6 +521,46 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
           <div ref={messagesEndRef} />
         </div>
 
+        {/* Image Previews */}
+        {previewImages.length > 0 && (
+          <div className="image-preview-container">
+            <div className="preview-header">
+              <span className="preview-title">
+                Загружено изображений: {previewImages.length}
+              </span>
+              <button
+                className="clear-previews-btn"
+                onClick={clearAllPreviews}
+                title="Удалить все изображения"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="preview-images">
+              {previewImages.map((url, index) => (
+                <div key={index} className="preview-image-item">
+                  <img src={url} alt={`Preview ${index + 1}`} className="preview-image" />
+                  <button
+                    className="remove-image-btn"
+                    onClick={() => removePreviewImage(index)}
+                    title="Удалить изображение"
+                  >
+                    ✕
+                  </button>
+                  <span className="image-label">
+                    {index === 0 ? 'Человек' : index === 1 ? 'Одежда' : `Фото ${index + 1}`}
+                  </span>
+                </div>
+              ))}
+            </div>
+            {previewImages.length === 2 && (
+              <div className="tryon-hint">
+                Напишите "одень эту вещь на меня" для виртуальной примерки!
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Input */}
         <div className="jarvis-input-area">
           <input
@@ -398,12 +570,20 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
             onChange={handleFileInputChange}
             style={{ display: 'none' }}
           />
+          <input
+            ref={imageInputRef}
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handleImageInputChange}
+            style={{ display: 'none' }}
+          />
           <div className="jarvis-input-container">
             <button
-              onClick={openFileDialog}
+              onClick={openImageDialog}
               disabled={isTyping || isUploadingFile}
-              className="jarvis-attachment-btn"
-              title="Прикрепить PDF файл"
+              className="jarvis-image-btn"
+              title="Загрузить изображения для примерки"
             >
               {isUploadingFile ? (
                 <div className="attachment-loading">
@@ -411,23 +591,33 @@ export default function ChatGPT({ isOpen, onClose }: ChatGPTProps) {
                 </div>
               ) : (
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M21.44 11.05L12.25 20.24C11.1137 21.3568 9.59034 21.9749 8.005 21.9749C6.41966 21.9749 4.8963 21.3568 3.76 20.24C2.64317 19.1037 2.02508 17.5803 2.02508 15.995C2.02508 14.4097 2.64317 12.8863 3.76 11.75L12.95 2.56C13.7006 1.80944 14.7186 1.38755 15.78 1.38755C16.8414 1.38755 17.8594 1.80944 18.61 2.56C19.3606 3.31056 19.7825 4.32859 19.7825 5.39C19.7825 6.45141 19.3606 7.46944 18.61 8.22L9.41 17.41C9.03494 17.7851 8.52656 17.9972 8 17.9972C7.47344 17.9972 6.96506 17.7851 6.59 17.41C6.21494 17.0349 6.00281 16.5266 6.00281 16C6.00281 15.4734 6.21494 14.9651 6.59 14.59L15.07 6.1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               )}
+            </button>
+            <button
+              onClick={openFileDialog}
+              disabled={isTyping || isUploadingFile}
+              className="jarvis-attachment-btn"
+              title="Прикрепить PDF файл"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M21.44 11.05L12.25 20.24C11.1137 21.3568 9.59034 21.9749 8.005 21.9749C6.41966 21.9749 4.8963 21.3568 3.76 20.24C2.64317 19.1037 2.02508 17.5803 2.02508 15.995C2.02508 14.4097 2.64317 12.8863 3.76 11.75L12.95 2.56C13.7006 1.80944 14.7186 1.38755 15.78 1.38755C16.8414 1.38755 17.8594 1.80944 18.61 2.56C19.3606 3.31056 19.7825 4.32859 19.7825 5.39C19.7825 6.45141 19.3606 7.46944 18.61 8.22L9.41 17.41C9.03494 17.7851 8.52656 17.9972 8 17.9972C7.47344 17.9972 6.96506 17.7851 6.59 17.41C6.21494 17.0349 6.00281 16.5266 6.00281 16C6.00281 15.4734 6.21494 14.9651 6.59 14.59L15.07 6.1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </button>
             <textarea
               ref={textareaRef}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Сообщение ДЖАРВИСУ..."
+              placeholder={previewImages.length > 0 ? "Опишите что хотите сделать с изображениями..." : "Сообщение ДЖАРВИСУ..."}
               className="jarvis-textarea"
               rows={1}
               disabled={isTyping || isUploadingFile}
             />
             <button
               onClick={handleSendMessage}
-              disabled={!inputText.trim() || isTyping || isUploadingFile}
+              disabled={(!inputText.trim() && previewImages.length === 0) || isTyping || isUploadingFile}
               className="jarvis-send-btn"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
